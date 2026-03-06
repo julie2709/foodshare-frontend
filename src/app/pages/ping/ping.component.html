@@ -1,0 +1,12 @@
+<h2>Test API Ping</h2>
+
+<div *ngIf="loading">Chargement...</div>
+
+<div *ngIf="error" style="color: red;">
+  {{ error }}
+</div>
+
+<div *ngIf="data">
+  <p><strong>ok:</strong> {{ data.ok }}</p>
+  <p><strong>message:</strong> {{ data.message }}</p>
+</div>

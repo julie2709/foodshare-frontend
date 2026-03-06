@@ -1,0 +1,205 @@
+<div class="container pt-4 pb-0 b">
+
+  <!-- ================= HERO SECTION ================= -->
+  <div class="hero card-soft p-3 p-lg-4">
+    <div class="row g-4">
+
+      <!-- ===== Texte ===== -->
+      <div class="col-lg-6 hero-content d-flex flex-column justify-content-center">
+
+        <h1 class="hero-title">
+          Donnez ce que vous n’utilisez plus,
+          <span class="highlight">récupérez près de chez vous</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Une plateforme solidaire pour réduire le gaspillage alimentaire
+          et aider votre communauté locale.
+        </p>
+
+        <!-- Boutons d’action -->
+        <div class="hero-actions">
+          <a routerLink="/dons" class="btn btn-fs px-4">Voir les dons</a>
+          <a routerLink="/connexion" class="btn btn-outline-success px-4">
+            Publier un don
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== Image Hero (trapèze) ===== -->
+      <div class="col-lg-6">
+        <div class="hero-image">
+          <img src="assets/hero/hero1.jpg" alt="Don alimentaire" />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== Barre de recherche ===== -->
+    <div class="search-bar card-soft p-2 mt-2">
+      <form class="row g-2 align-items-center" (ngSubmit)="onSearch()">
+
+        <div class="col-md-5">
+          <input
+            class="form-control"
+            placeholder="Rechercher un aliment..."
+            [(ngModel)]="q"
+            name="q"
+          />
+        </div>
+
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="category" name="category">
+            <option value="">Catégorie</option>
+            <option value="fruits">Fruits</option>
+            <option value="legumes">Légumes</option>
+            <option value="epicerie">Épicerie</option>
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <input
+            class="form-control"
+            placeholder="Ville"
+            [(ngModel)]="city"
+            name="city"
+          />
+        </div>
+
+        <div class="col-md-2 d-grid">
+          <button class="btn btn-fs">Rechercher</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ================= DONS RÉCENTS ================= -->
+  <div class="section mt-5">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h2 class="section-title mb-0">Dons récents</h2>
+      <a routerLink="/dons" class="link-fs">Voir tout</a>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12 col-sm-6 col-lg-3" *ngFor="let item of recentListings">
+
+        <div class="card card-listing h-100">
+          <img [src]="item.image" class="card-img-top" [alt]="item.title" />
+
+          <div class="card-body">
+            <h3 class="card-title">{{ item.title }}</h3>
+
+            <div class="meta text-muted">
+              <span class="me-2">📍 {{ item.city }}</span>
+              <span>• Jusqu’au {{ item.expiry }}</span>
+            </div>
+
+            <div class="mt-3">
+              <span
+                class="badge badge-soft"
+                [ngClass]="{
+                  'badge-soft--success': item.status === 'Disponible',
+                  'badge-soft--warning': item.status === 'Réservée',
+                  'badge-soft--neutral': item.status === 'Donnée'
+                }"
+              >
+                {{ item.status }}
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= IDÉES RECETTES ================= -->
+  <div class="section mt-5">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h2 class="section-title mb-0">Idées recettes</h2>
+      <a routerLink="/recettes" class="link-fs">Explorer</a>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12 col-sm-6 col-lg-3" *ngFor="let r of recipes">
+        <div class="card card-recipe h-100">
+          <img [src]="r.image" class="card-img-top" [alt]="r.title" />
+          <div class="card-body">
+            <h3 class="card-title">{{ r.title }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= COMMENT ÇA MARCHE ================= -->
+  <div class="how-it-works mt-5 mb-5">
+
+    <div class="how-title-wrap">
+      <span class="line"></span>
+      <h2 class="section-title fw-1">Comment ça marche ?</h2>
+      <span class="line"></span>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Étape 1 -->
+      <div class="col-12 col-md-4">
+        <div class="how-card">
+          <div class="div-icon d-flex flex-column">
+            <div class="how-badge mb-3">1</div>
+            <div class="how-content">
+              <img src="assets/icones/publier.png" class="how-icon" />
+            </div>
+          </div>
+
+          <div class="text-div-icon d-flex flex-column gap-4">
+            <h3 class="how-title pt-2">Publier</h3>
+            <p class="text-muted mb-0">Déposez vos annonces de dons.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 2 -->
+      <div class="col-12 col-md-4">
+        <div class="how-card">
+          <div class="div-icon d-flex flex-column">
+            <div class="how-badge mb-3">2</div>
+            <div class="how-content">
+              <img src="assets/icones/demande.png" class="how-icon" />
+            </div>
+          </div>
+
+          <div class="text-div-icon d-flex flex-column gap-4">
+            <h3 class="how-title pt-2">Demander</h3>
+            <p class="text-muted">Faites une demande en un clic.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 3 -->
+      <div class="col-12 col-md-4">
+        <div class="how-card">
+          <div class="div-icon d-flex flex-column">
+            <div class="how-badge mb-3">3</div>
+            <div class="how-content">
+              <img src="assets/icones/recuperation.png" class="how-icon" />
+            </div>
+          </div>
+
+          <div class="text-div-icon d-flex flex-column gap-4">
+            <h3 class="how-title pt-2">Récupérer</h3>
+            <p class="text-muted">Récupérez vos aliments facilement.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

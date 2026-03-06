@@ -1,0 +1,66 @@
+<app-auth-shell>
+
+  <h1 class="auth-title">Connexion</h1>
+  <p class="auth-subtitle text-muted">Ravi de vous revoir ! Connectez-vous à votre compte.</p>
+
+  <form class="auth-form mt-4" (ngSubmit)="onSubmit()">
+
+    <!-- Email -->
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Adresse e-mail"
+        name="email"
+        [(ngModel)]="model.email"
+        required
+      />
+    </div>
+
+    <!-- Password -->
+    <div class="input-group mb-2">
+      <span class="input-group-text"><i class="bi bi-key"></i></span>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Mot de passe"
+        name="password"
+        [(ngModel)]="model.password"
+        required
+      />
+    </div>
+
+    <!-- Remember + forgot -->
+    <div class="d-flex align-items-center justify-content-between mt-2 mb-3">
+      <label class="form-check d-flex align-items-center gap-2 mb-0">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [(ngModel)]="model.remember"
+          name="remember"
+        />
+        <span class="form-check-label">Se souvenir de moi</span>
+      </label>
+
+      <a routerLink="/mot-de-passe-oublie" class="auth-link">Mot de passe oublié ?</a>
+    </div>
+
+    <button class="btn btn-fs w-100 auth-submit" type="submit">
+      Se connecter
+    </button>
+
+    <div class="auth-divider my-4"></div>
+
+    <p class="text-center mb-2 text-muted">Pas encore de compte ?</p>
+    <div class="text-center">
+      <a routerLink="/inscription" class="auth-link auth-link--big">Inscription</a>
+    </div>
+
+    <button class="btn btn-outline-success w-100 mt-3" type="button" (click)="continueWithGoogle()">
+      <span class="me-2">G</span> continuer avec Google
+    </button>
+
+  </form>
+
+</app-auth-shell>

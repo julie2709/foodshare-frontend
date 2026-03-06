@@ -1,0 +1,63 @@
+/* =======================================================
+   LOGIN / REGISTER shared styles (form col droite)
+   ======================================================= */
+
+.auth-title {
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+}
+
+.auth-subtitle {
+  text-align: center;
+  margin: 10px 0 0;
+  line-height: 1.4;
+}
+
+/* Input group style */
+.input-group-text {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--fs-border);
+  border-right: 0;
+  border-radius: var(--fs-radius-sm) 0 0 var(--fs-radius-sm);
+  color: var(--fs-muted);
+}
+
+.form-control {
+  border: 1px solid var(--fs-border);
+  border-left: 0;
+  border-radius: 0 var(--fs-radius-sm) var(--fs-radius-sm) 0;
+  padding: 12px 12px;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem var(--fs-focus);
+}
+
+/* CTA */
+.auth-submit {
+  border-radius: var(--fs-radius-sm); /* sur auth, on garde plus “card” que pill */
+  font-weight: 900;
+  padding: 12px 16px;
+}
+
+.auth-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Links */
+.auth-link {
+  color: var(--fs-green);
+  font-weight: 800;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.auth-link--big {
+  font-size: 15px;
+}

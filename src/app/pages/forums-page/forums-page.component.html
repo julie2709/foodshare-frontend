@@ -1,0 +1,137 @@
+<div class="container pt-4 pb-5 forum-page">
+
+  <div class="row g-4 align-items-stretch forum-layout">
+
+    <!-- ================= SIDEBAR CATEGORIES ================= -->
+    <aside class="col-12 col-lg-3 d-flex">
+      <div class="card-soft p-3 sidebar w-100 d-flex flex-column">
+
+        <h3 class="sidebar-title mb-3">Catégories</h3>
+
+        <!-- Liste catégories -->
+        <div class="sidebar-list">
+          <button
+            type="button"
+            class="category-item"
+            *ngFor="let c of categories"
+            [class.is-active]="c.id === selectedCategoryId"
+            (click)="selectCategory(c.id)"
+          >
+            <span class="category-icon">{{ c.icon }}</span>
+
+            <span class="category-text">
+              <span class="category-name">{{ c.name }}</span>
+              <span class="category-count">{{ c.count }}</span>
+            </span>
+          </button>
+        </div>
+
+        <!-- Bloc règles (comme maquette) -->
+        <div class="rules mt-3">
+          <div class="rules-header">
+            <span class="rules-icon">⚠️</span>
+            <h4 class="rules-title mb-0">Comment respecter le règlement ?</h4>
+          </div>
+
+          <p class="rules-text mb-3">
+            Restez courtois et constructif. Les contenus inappropriés ou hors charte seront modérés.
+          </p>
+
+          <a class="btn btn-fs w-100" routerLink="/regles">
+            Consulter les règles
+          </a>
+        </div>
+
+      </div>
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <section class="col-12 col-lg-9 d-flex">
+      <div class="card-soft p-3 p-lg-4 main w-100 d-flex flex-column">
+
+        <!-- ===== Header Forum ===== -->
+        <div class="forum-header mb-3">
+          <div>
+            <h2 class="forum-title mb-1">Forum</h2>
+            <p class="forum-subtitle mb-0 text-muted">
+              {{ stats.topics }} sujets • {{ stats.replies }} réponses
+            </p>
+          </div>
+
+          <div class="sort-wrap d-flex align-items-center gap-2">
+            <label class="sort-label mb-0">Trier par:</label>
+            <select class="form-select form-select-sm sort-select" [(ngModel)]="sort" (change)="applyFilters()">
+              <option value="popular">Popularité</option>
+              <option value="recent">Plus récent</option>
+              <option value="replies">Réponses</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ===== Section: sujets récents ===== -->
+        <div class="topics card-soft p-3">
+          <h3 class="topics-title mb-3">Sujets récents</h3>
+
+          <!-- Liste sujets -->
+          <div class="topic-row" *ngFor="let t of pagedTopics">
+            <!-- Tag catégorie -->
+            <span class="topic-tag py-4 text-center">{{ t.categoryName }}</span>
+
+            <!-- Avatar + contenu -->
+            <div class="topic-main">
+              <img class="avatar" [src]="t.authorAvatar" alt="avatar" />
+
+              <div class="topic-content">
+                <div class="topic-title">{{ t.title }}</div>
+
+                <div class="topic-meta text-muted">
+                  <span class="me-2">
+                    <i class="bi bi-person me-1"></i>{{ t.author }}
+                  </span>
+                  <span>
+                    <i class="bi bi-clock me-1"></i>{{ t.timeAgo }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats à droite -->
+            <div class="topic-side">
+              <div class="topic-replies">
+                <i class="bi bi-chat-left-text me-1"></i>{{ t.replies }}
+              </div>
+
+              <div class="topic-badge">
+                {{ t.related }} sujets
+              </div>
+
+              <div class="topic-last text-muted">
+                {{ t.lastActivity }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Pagination ===== -->
+        <nav class="pagination-wrap mt-4" aria-label="Pagination forum" *ngIf="totalPages > 1">
+          <ul class="pagination justify-content-center mb-0">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <button class="page-link" type="button" (click)="goToPage(currentPage - 1)">‹</button>
+            </li>
+
+            <li class="page-item" *ngFor="let p of pages" [class.active]="p === currentPage">
+              <button class="page-link" type="button" (click)="goToPage(p)">{{ p }}</button>
+            </li>
+
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <button class="page-link" type="button" (click)="goToPage(currentPage + 1)">›</button>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </section>
+
+  </div>
+</div>

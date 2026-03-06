@@ -1,0 +1,175 @@
+/* =======================================================
+   NAVBAR STYLES (component)
+   - Objectif : garder ici uniquement le spécifique navbar
+   - Les couleurs/radius/boutons sont gérés par les tokens globaux
+   ======================================================= */
+
+/* =======================================================
+   NAVBAR CONTAINER
+   ======================================================= */
+.navbar {
+  background: var(--fs-surface); /* = blanc */
+  border-bottom: 1px solid var(--fs-border-navbar);
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+
+  /* Option premium (si tu veux un léger blur)
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.92);
+  */
+}
+
+/* Optionnel : si tu ajoutes/enlèves la classe .scrolled en TS */
+.navbar.scrolled {
+  box-shadow: var(--fs-shadow-navbar);
+}
+
+
+/* =======================================================
+   BRAND / LOGO
+   ======================================================= */
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--fs-green);
+  font-size: 22px;
+  padding: 0;
+  line-height: 1;
+  position: relative;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+
+  /* Texte "FoodShare" */
+  .title {
+    display: block;
+    margin-left: 90px;
+    font-weight: 700;
+
+    .food {
+      color: var(--fs-green-2);
+      font-weight: 800;
+    }
+
+    .share {
+      color: var(--fs-green);
+    }
+  }
+
+  /* Logo image */
+  .logo-container {
+    height: 85px;
+    width: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    padding: 6px;
+  }
+
+  .logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+
+/* =======================================================
+   MENU LINKS (centre)
+   ======================================================= */
+.navbar-nav {
+  gap: 6px; /* spacing doux entre items */
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  color: var(--fs-text);
+  padding: 10px 12px;
+  border-radius: var(--fs-radius-sm);
+  transition: color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    color: var(--fs-green);
+    background-color: rgba(47, 107, 79, 0.06);
+  }
+
+  &.active {
+    color: var(--fs-green);
+    font-weight: 600;
+    background-color: rgba(47, 107, 79, 0.08);
+
+    /* Soulignement “soft” */
+    &::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 2px;
+      height: 2px;
+      border-radius: var(--fs-radius-pill);
+      background: var(--fs-green);
+    }
+  }
+}
+
+
+/* =======================================================
+   PROFILE ICON
+   ======================================================= */
+.profile-icon {
+  color: var(--fs-green);
+}
+
+
+/* =======================================================
+   TOGGLER (mobile)
+   ======================================================= */
+.navbar-toggler {
+  border: 1px solid rgba(47, 107, 79, 0.25);
+  border-radius: var(--fs-radius-sm);
+  padding: 0.35rem 0.5rem;
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(47, 107, 79, 0.15);
+  }
+}
+
+/* Améliore la lisibilité de l’icône burger (Bootstrap 5) */
+.navbar-light .navbar-toggler-icon {
+  filter: saturate(0.4) brightness(0.6);
+}
+
+
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
+@media (max-width: 992px) {
+  .navbar-nav {
+    gap: 2px;
+    padding-top: 10px;
+  }
+
+  .nav-link {
+    padding: 10px 10px;
+
+    &.active::after {
+      left: 10px;
+      right: 10px;
+      bottom: 6px;
+    }
+  }
+
+  /* Bloc boutons en colonne sur mobile */
+  .d-flex.gap-2 {
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: stretch;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

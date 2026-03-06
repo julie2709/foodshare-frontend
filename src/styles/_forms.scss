@@ -1,0 +1,11 @@
+/* src/styles/_forms.scss */
+.form-control,
+.form-select {
+  border-radius: var(--fs-radius-md);
+  border: 1px solid var(--fs-border);
+
+  &:focus {
+    border-color: rgba(47, 107, 79, 0.35);
+    box-shadow: 0 0 0 0.2rem rgba(47, 107, 79, 0.12);
+  }
+}

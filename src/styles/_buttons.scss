@@ -1,0 +1,118 @@
+/* src/styles/_buttons.scss */
+
+/* ===== FoodShare (pill) ===== */
+.btn-fs {
+  --_bg: var(--fs-green);
+  --_text: var(--fs-white);
+  --_border: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 16px;
+  border-radius: var(--fs-radius-pill);
+  border: 1px solid var(--_border);
+
+  background: var(--_bg);
+  color: var(--_text);
+  font-weight: 800;
+  text-decoration: none;
+
+  box-shadow: var(--fs-shadow-sm);
+  transition: transform 0.15s ease, filter 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+
+  /* 🔒 Verrouille les styles au survol pour éviter les overrides Bootstrap */
+ &:hover {
+  background: var(--_bg);
+  border-color: var(--_border);
+  color: var(--_text);
+
+  transform: translateY(-1px) scale(1.05); /* 👈 grossit + lift */
+  filter: brightness(0.98);
+}
+
+  &:active {
+    background: var(--_bg);
+    border-color: var(--_border);
+    color: var(--_text);
+
+    transform: translateY(0);
+  }
+
+  &:focus {
+    /* On garde le fond/texte aussi en focus */
+    background: var(--_bg);
+    border-color: var(--_border);
+    color: var(--_text);
+
+    box-shadow: 0 0 0 0.2rem var(--fs-focus);
+  }
+
+
+  &:active {
+    background: var(--_bg);
+    border-color: var(--_border);
+    color: var(--_text);
+
+    transform: translateY(0);
+  }
+
+  &:focus {
+    /* On garde le fond/texte aussi en focus */
+    background: var(--_bg);
+    border-color: var(--_border);
+    color: var(--_text);
+
+    box-shadow: 0 0 0 0.2rem var(--fs-focus);
+  }
+
+}
+
+/* Variante outline */
+.btn-fs--outline {
+  --_bg: transparent;
+  --_text: var(--fs-green-700);
+  --_border: rgba(47, 107, 79, 0.35);
+
+  box-shadow: none;
+
+  &:hover {
+    background: rgba(47, 107, 79, 0.08);
+  }
+}
+
+/* Variante “soft” */
+.btn-fs--soft {
+  --_bg: rgba(47, 107, 79, 0.10);
+  --_text: var(--fs-green-700);
+  --_border: transparent;
+
+  box-shadow: none;
+}
+
+.btn-success {
+  background: var(--fs-green);
+  border-color: var(--fs-green);
+  color: var(--fs-white);
+
+  &:hover,
+  &:focus {
+    background: var(--fs-hover-bg);   /* même fond que nav */
+    border-color: var(--fs-green);
+    color: var(--fs-green);           /* texte vert */
+  }
+}
+.btn-outline-success {
+  background: transparent;
+  color: var(--fs-green);
+  border-color: var(--fs-green);
+
+  &:hover,
+  &:focus {
+    background: var(--fs-hover-bg);  /* identique nav */
+    color: var(--fs-green);
+    border-color: var(--fs-green);
+  }
+}

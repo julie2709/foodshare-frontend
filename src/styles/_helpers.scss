@@ -1,0 +1,29 @@
+/* src/styles/_helpers.scss */
+
+.badge-soft {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: var(--fs-radius-pill);
+  font-weight: 900;
+  font-size: 12px;
+  border: 1px solid transparent;
+}
+
+.badge-soft--success {
+  background: rgba(47, 107, 79, 0.10);
+  color: var(--fs-green);
+  border-color: rgba(47, 107, 79, 0.20);
+}
+
+.badge-soft--warning {
+  background: rgba(255, 193, 7, 0.18);
+  color: #8a6a00;
+  border-color: rgba(255, 193, 7, 0.25);
+}
+
+.badge-soft--neutral {
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.70);
+  border-color: rgba(0, 0, 0, 0.10);
+}

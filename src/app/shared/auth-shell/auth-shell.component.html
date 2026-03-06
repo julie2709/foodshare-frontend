@@ -1,0 +1,42 @@
+<div class="auth-page">
+  <div class="container border border-danger py-5">
+    <div class="auth-grid border border-danger card-soft">
+
+      <!-- ================= LEFT PANEL (marketing) ================= -->
+      <aside class="auth-left">
+        <div class="auth-left__inner border border-danger d-flex flex-column justify-content-center align-items-center gap-2 text-center">
+          <div class="hero ">
+            <div class="row w-100 flex-row justify-content-center ">
+              <div class="hero__icon d-flex   " aria-hidden="true">
+              <!-- Icône personne + (Bootstrap Icons) -->
+              <i class="bi bi-person-plus"></i>
+              </div>
+            </div>
+            
+
+            <h2 class="hero__title">Join FoodShare</h2>
+            <p class="hero__text">
+              Rejoignez la communauté et réduisez le gaspillage alimentaire avec votre quartier.
+            </p>
+
+            <ul class="hero__bullets">
+              <li><i class="bi bi-check2-circle"></i> Donnez et récupérez facilement</li>
+              <li><i class="bi bi-check2-circle"></i> Recettes anti-gaspi</li>
+              <li><i class="bi bi-check2-circle"></i> Entraide locale</li>
+            </ul>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- ================= RIGHT PANEL (form) ================= -->
+      <section class="auth-right">
+        <div class="auth-right__inner">
+          <!-- Projection du contenu (login/register) -->
+          <ng-content></ng-content>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>

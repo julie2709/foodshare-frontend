@@ -1,0 +1,27 @@
+/* src/styles/_cards.scss */
+/* src/styles/_cards.scss */
+
+.card-soft {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--fs-border);
+  border-radius: var(--fs-radius-lg);
+  box-shadow: var(--fs-shadow-sm);
+  backdrop-filter: blur(6px);
+}
+
+/* cartes list/recherche/recette */
+.card-listing,
+.card-recipe {
+  border-radius: var(--fs-radius-lg);
+  border: 1px solid var(--fs-border);
+  overflow: hidden;
+  box-shadow: var(--fs-shadow-sm);
+
+  .card-title {
+    font-weight: 900;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--fs-text);
+  }
+}
+

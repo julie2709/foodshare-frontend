@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-4 fixed-top">
+  <div class="container">
+
+    <!-- ================= BRAND / LOGO ================= -->
+    <a class="navbar-brand fw-bold text-fs d-flex align-items-center" routerLink="/">
+      <div class="logo-container">
+        <img src="./assets/icones/logo2-rmbgpaint.png" alt="logo site" />
+      </div>
+
+      <span class="title">
+        <span class="food">Food</span><span class="share">Share</span>
+      </span>
+    </a>
+
+    <!-- ================= TOGGLER (MOBILE) ================= -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- ================= NAV CONTENT ================= -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <!-- ===== Menu (centre) ===== -->
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Accueil
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dons" routerLinkActive="active">Dons</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/recettes" routerLinkActive="active">Recettes</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/forum" routerLinkActive="active">Forum</a>
+        </li>
+      </ul>
+
+      <!-- ===== Actions (droite) ===== -->
+      <div class="d-flex gap-2 align-items-center">
+        <a routerLink="/connexion" class="btn btn-outline-success">Connexion</a>
+
+        <a routerLink="/profil" class="profile-icon text-success fs-4" aria-label="Profil">
+          <i class="bi bi-person"></i>
+        </a>
+
+        <a routerLink="/inscription" class="btn btn-success">Inscription</a>
+      </div>
+
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,197 @@
+/* =======================================================
+   DONS PAGE (layout + sidebar + pagination)
+   - Tokens, buttons, cards, forms, badges : en global
+   - Ici : uniquement les styles spécifiques à la page Dons
+   ======================================================= */
+
+
+/* =======================================================
+   HERO SECTION (haut de page)
+   ======================================================= */
+
+.hero {
+  background: var(--fs-bg);
+  border-radius: var(--fs-radius-lg);
+}
+
+.hero-content {
+  min-height: 320px; /* équilibre visuel avec la hauteur de l’image */
+}
+
+.hero-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--fs-green);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title .highlight {
+  color: var(--fs-green);
+  font-weight: 900;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--fs-muted);
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+
+/* =======================================================
+   HERO IMAGE (trapèze)
+   ======================================================= */
+
+.hero-image {
+  height: 340px;
+  overflow: hidden;
+  border-radius: 24px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* effet trapèze */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
+    border-radius: 24px;
+  }
+}
+
+
+/* =======================================================
+   PAGE HEADER (bloc "Dons" + texte)
+   ======================================================= */
+
+.page-title {
+  font-weight: 900;
+  letter-spacing: -0.2px;
+  margin: 0;
+}
+
+.page-subtitle {
+  color: var(--fs-muted);
+  margin: 0;
+}
+
+
+/* =======================================================
+   MAIN LAYOUT
+   - Objectif : sidebar et résultats à la même hauteur
+   ======================================================= */
+
+/* Étire les colonnes Bootstrap (sidebar + results) sur desktop */
+.dons-layout > [class*="col-"] {
+  display: flex;
+}
+
+/* Les 2 cartes prennent toute la largeur de leur colonne */
+.filters,
+.results {
+  width: 100%;
+}
+
+
+/* =======================================================
+   FILTERS (sidebar)
+   ======================================================= */
+
+.filters {
+  /* Sticky uniquement sur desktop : garde les filtres visibles au scroll
+     NOTE : top doit correspondre à ta navbar fixed-top + marge.
+     Si ta navbar change de hauteur, ajuste cette valeur. */
+  position: sticky;
+  top: 92px;
+}
+
+.filters__title {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.filters__label {
+  display: block;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--fs-text);
+  margin-bottom: 6px;
+}
+
+
+/* =======================================================
+   RESULTS (header / count)
+   ======================================================= */
+
+.results-count {
+  font-weight: 700;
+}
+
+
+/* =======================================================
+   CARDS (petits ajustements spécifiques page Dons)
+   - Le design principal des cards est en global
+   ======================================================= */
+
+.card-listing .card-img-top {
+  height: 150px; /* override léger uniquement pour la page dons */
+  object-fit: cover;
+}
+
+
+/* =======================================================
+   PAGINATION
+   ======================================================= */
+
+.pagination-wrap .page-link {
+  border-radius: var(--fs-radius-sm);
+  border: 1px solid var(--fs-border);
+  color: var(--fs-green);
+  font-weight: 800;
+}
+
+/* Page active */
+.pagination-wrap .page-item.active .page-link {
+  background: var(--fs-green);
+  border-color: var(--fs-green);
+  color: var(--fs-white);
+}
+
+/* Page désactivée */
+.pagination-wrap .page-item.disabled .page-link {
+  opacity: 0.5;
+  color: var(--fs-text);
+}
+
+/* (Optionnel mais cohérent) : hover léger sur pagination */
+.pagination-wrap .page-item:not(.active):not(.disabled) .page-link:hover {
+  background: var(--fs-hover-bg, rgba(47, 107, 79, 0.06));
+}
+
+
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
+
+@media (max-width: 992px) {
+  /* Sur mobile/tablette : sidebar passe au-dessus et n’est plus sticky */
+  .filters {
+    position: static;
+    top: auto;
+  }
+
+   .hero-image {
+    height: 180px;
+
+    img {
+      clip-path: none;
+      border-radius: 16px;
+    }
+  }
+}

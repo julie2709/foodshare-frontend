@@ -1,0 +1,84 @@
+<app-auth-shell class="border border-danger">
+
+  <h1 class="auth-title border border-danger">Inscription</h1>
+  <p class="auth-subtitle text-muted">
+    Rejoignez la communauté FoodShare et commencez à réduire le gaspillage alimentaire.
+  </p>
+
+  <form class="auth-form mt-4" (ngSubmit)="onSubmit()">
+
+    <!-- Nom -->
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-person"></i></span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Nom"
+        name="name"
+        [(ngModel)]="model.name"
+        required
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Adresse e-mail"
+        name="email"
+        [(ngModel)]="model.email"
+        required
+      />
+    </div>
+
+    <!-- Password -->
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-key"></i></span>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Mot de passe"
+        name="password"
+        [(ngModel)]="model.password"
+        required
+      />
+    </div>
+
+    <!-- Confirm -->
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Confirmer le mot de passe"
+        name="confirm"
+        [(ngModel)]="model.confirm"
+        required
+      />
+    </div>
+    <div class="conteneur-btn w-100 d-flex justify-content-center">
+      <button class="btn btn-fs  auth-submit fs-4" type="submit">
+      S'inscrire
+    </button>
+    </div>
+    
+
+    <div class="auth-divider my-4"></div>
+
+    <p class="text-center mb-2 text-muted">Vous avez déjà un compte ?</p>
+    <div class="text-center">
+      <a routerLink="/connexion" class="auth-link auth-link--big">Connexion</a>
+    </div>
+
+    <p class="small text-muted text-center mt-3 mb-0">
+      En vous inscrivant, vous acceptez nos
+      <a routerLink="/conditions" class="auth-link">Conditions générales</a>
+      et notre
+      <a routerLink="/confidentialite" class="auth-link">Politique de confidentialité</a>.
+    </p>
+
+  </form>
+
+</app-auth-shell>

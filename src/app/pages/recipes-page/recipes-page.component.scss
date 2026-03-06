@@ -1,0 +1,247 @@
+/* =======================================================
+   HERO SECTION (haut de page)
+   ======================================================= */
+
+.hero {
+  background: var(--fs-bg);
+  border-radius: var(--fs-radius-lg);
+}
+
+.hero-content {
+  min-height: 320px; /* équilibre visuel avec la hauteur de l’image */
+}
+
+.hero-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--fs-green);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title .highlight {
+  color: var(--fs-green);
+  font-weight: 900;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--fs-muted);
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+
+/* =======================================================
+   HERO IMAGE (trapèze)
+   ======================================================= */
+
+.hero-image {
+  height: 340px;
+  overflow: hidden;
+  border-radius: 24px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* effet trapèze */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 9% 100%);
+    border-radius: 24px;
+  }
+}
+
+
+/* =======================================================
+   PAGE HEADER (bloc "Dons" + texte)
+   ======================================================= */
+
+.page-title {
+  font-weight: 900;
+  letter-spacing: -0.2px;
+  margin: 0;
+}
+
+.page-subtitle {
+  color: var(--fs-muted);
+  margin: 0;
+}
+
+/* =======================================================
+   RECIPES PAGE
+   - Tokens/buttons/forms/cards: global
+   - Ici : filtre + layout recettes + micro-ajustements
+   ======================================================= */
+
+.recipes-page {
+  /* rien d'obligatoire ici, garde le fond global */
+}
+
+/* ================= Filter Card ================= */
+.recipes-filter {
+  /* Visuellement proche des autres pages */
+  // background: var(--fs-bg);
+}
+
+.recipes-count {
+  display: inline-flex;
+  align-items: center;
+  color: var(--fs-text);
+  font-weight: 800;
+}
+
+/* Label "Trier par" */
+.filter-label {
+  font-weight: 800;
+  color: var(--fs-muted);
+  font-size: 13px;
+}
+
+.sort-select {
+  width: 170px;
+}
+
+/* Search input avec icône à l'intérieur */
+.search-wrap {
+  position: relative;
+
+  i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--fs-muted);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .search-input {
+    padding-left: 36px; /* laisse la place à l’icône */
+  }
+}
+
+.reset-btn {
+  /* garde le style global outline */
+  white-space: nowrap;
+}
+
+/* ================= Recipe Cards ================= */
+
+.recipe-meta {
+  font-size: 13px;
+  margin-top: 6px;
+
+  i {
+    opacity: 0.85;
+  }
+}
+
+.results{
+  background: var(--fs-bg);
+}
+
+/* ================= Listing Grid ================= */
+
+.listing-card {
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--fs-white);
+  box-shadow: var(--fs-shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--fs-shadow-md);
+  }
+}
+
+/* Image plus compacte */
+.listing-card .card-img-top {
+  height: 200px;       /* 🔥 clé du rendu compact */
+  object-fit: cover;
+  display: block;
+}
+
+/* Titre compact */
+.listing-card .card-title {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+/* Meta fine */
+.listing-card .meta {
+  font-size: 13px;
+}
+
+/* Badge cohérent */
+.badge-soft {
+  font-size: 11px;
+  padding: 5px 10px;
+}
+
+/* Voir link */
+.link-fs {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* ================= Pagination (cohérent avec dons) ================= */
+.pagination-wrap .page-link {
+  border-radius: var(--fs-radius-sm);
+  border: 1px solid var(--fs-border);
+  color: var(--fs-green);
+  font-weight: 800;
+}
+
+.pagination-wrap .page-item.active .page-link {
+  background: var(--fs-green);
+  border-color: var(--fs-green);
+  color: var(--fs-white);
+}
+
+.pagination-wrap .page-item.disabled .page-link {
+  opacity: 0.5;
+  color: var(--fs-text);
+}
+
+.pagination-wrap .page-item:not(.active):not(.disabled) .page-link:hover {
+  background: var(--fs-hover-bg, rgba(47, 107, 79, 0.06));
+}
+
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
+
+@media (max-width: 992px) {
+  /* Sur mobile/tablette : sidebar passe au-dessus et n’est plus sticky */
+
+
+  .hero{
+    text-align: center;
+  } 
+  
+  .hero-image {
+    height: 180px;
+    
+
+    img {
+      clip-path: none;
+      border-radius: 16px;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .sort-select {
+    width: 100%;
+  }
+}

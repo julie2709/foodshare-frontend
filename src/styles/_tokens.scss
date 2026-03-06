@@ -1,0 +1,52 @@
+/* src/styles/_tokens.scss */
+:root {
+  /* ===== Brand / Greens ===== */
+  --fs-green: #2f6b4f;        /* principal */
+  --fs-green-2: #40916c;      /* accent “Food” */
+  --fs-green-800: #295a43;
+  --fs-green-900: #214a37;
+
+  /* ===== Surfaces ===== */
+  --fs-bg: #f6f1e8;           /* fond global */
+  --fs-surface: #ffffff;      /* cards / navbar */
+
+  /* ===== Text ===== */
+  --fs-text: #161616;         /* unique */
+  --fs-muted: rgba(0, 0, 0, 0.60);
+
+  /* ===== Borders ===== */
+  --fs-border: rgba(0, 0, 0, 0.08);
+  --fs-border-navbar: #f0f0f0; /* optionnel (navbar plus “net”) */
+
+  /* ===== Misc ===== */
+  --fs-white: #ffffff;
+
+  /* ===== Typography ===== */
+  --fs-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  --fs-font-title: var(--fs-font-sans);
+  --fs-text-base: 16px;
+  --fs-line: 1.5;
+
+  /* ===== Radius ===== */
+  --fs-radius-sm: 10px;
+  --fs-radius-md: 14px;
+  --fs-radius-lg: 18px;
+  --fs-radius-pill: 999px;
+
+  /* ===== Focus ===== */
+  --fs-focus: rgba(47, 107, 79, 0.18);
+   /* ===== Focus ===== */
+   --fs-hover-bg: rgba(47, 107, 79, 0.06);
+
+  /* ===== Shadows ===== */
+  --fs-shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.08);
+  --fs-shadow-md: 0 10px 24px rgba(0, 0, 0, 0.10);
+  --fs-shadow-navbar: 0 10px 28px rgba(0, 0, 0, 0.08);
+
+  /* ===== Spacing ===== */
+  --fs-space-1: 6px;
+  --fs-space-2: 10px;
+  --fs-space-3: 14px;
+  --fs-space-4: 18px;
+  --fs-space-5: 24px;
+}

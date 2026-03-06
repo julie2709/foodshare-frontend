@@ -1,0 +1,168 @@
+/* =======================================================
+   FOOTER STYLES (component)
+   - basé sur les tokens globaux (var(--fs-*))
+   - pas de variables SCSS locales
+   - rendu identique
+   ======================================================= */
+
+.fs-footer {
+  /* Muted spécifique footer (texte blanc transparent)
+     -> on ne touche pas aux tokens globaux, car ailleurs muted = noir */
+  --fs-footer-muted: rgba(255, 255, 255, 0.75);
+
+  /* ===== Background / Border ===== */
+  background: linear-gradient(180deg, var(--fs-green-800) 0%, var(--fs-green-900) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* Le footer est sur fond sombre : on force un texte clair */
+  color: var(--fs-white);
+
+  /* =======================================================
+     BRAND / LOGO
+     ======================================================= */
+  .footer-logo {
+    height: 100px;
+    width: 100px; /* carré */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 70px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .footer-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fs-brand__logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    color: var(--fs-white);
+    margin-left: 10px;
+    opacity: 0.8;
+  }
+
+  /* =======================================================
+     TEXT / TITLES
+     ======================================================= */
+  .fs-footer__text {
+    color: var(--fs-footer-muted);
+    max-width: 360px;
+    line-height: 1.5;
+    font-size: 14px;
+  }
+
+  .fs-footer__title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: var(--fs-white);
+    opacity: 0.95;
+    margin-bottom: 12px;
+  }
+
+  /* =======================================================
+     LISTS / LINKS
+     ======================================================= */
+  .fs-footer__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .fs-footer__link {
+    color: var(--fs-footer-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+
+    &:hover {
+      color: var(--fs-white);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  .fs-footer__item {
+    color: var(--fs-footer-muted);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+  }
+
+  /* =======================================================
+     SOCIAL BUTTONS
+     ======================================================= */
+  .fs-social {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--fs-radius-pill);
+    display: grid;
+    place-items: center;
+
+    text-decoration: none;
+    color: var(--fs-white);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    transition: transform 0.2s ease, background 0.2s ease;
+
+    i {
+      font-size: 16px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+  }
+
+  /* =======================================================
+     BOTTOM BAR
+     ======================================================= */
+  .fs-footer__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(0, 0, 0, 0.08);
+
+    small {
+      color: var(--fs-footer-muted);
+    }
+  }
+
+  /* Liens bottom (mentions) */
+  .fs-footer__bottom-link {
+    color: var(--fs-footer-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+
+    &:hover {
+      color: var(--fs-white);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+}
+
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
+@media (max-width: 576px) {
+  .fs-footer .fs-footer__text {
+    max-width: 100%;
+  }
+}

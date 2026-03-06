@@ -1,0 +1,251 @@
+/* =======================================================
+   FORUM PAGE (2 columns layout)
+   - tokens/buttons/cards/forms: global
+   ======================================================= */
+
+.forum-layout > [class*="col-"] {
+  display: flex;
+}
+
+/* ================= Sidebar ================= */
+.sidebar-title {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.sidebar-list {
+  display: grid;
+  gap: 10px;
+}
+
+.category-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: var(--fs-radius-sm);
+  border: 1px solid var(--fs-border);
+  background: var(--fs-surface);
+
+  cursor: pointer;
+  text-align: left;
+
+  transition: transform 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    background: var(--fs-hover-bg, rgba(47, 107, 79, 0.06));
+    transform: translateY(-1px);
+  }
+
+  &.is-active {
+    border-color: rgba(47, 107, 79, 0.25);
+    background: rgba(47, 107, 79, 0.08);
+  }
+}
+
+.category-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(47, 107, 79, 0.10);
+  font-size: 16px;
+}
+
+.category-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+.category-name {
+  font-weight: 800;
+  color: var(--fs-text);
+  font-size: 13px;
+}
+
+.category-count {
+  font-weight: 900;
+  font-size: 12px;
+  color: var(--fs-muted);
+}
+
+/* Règles */
+.rules {
+  border-radius: var(--fs-radius-md);
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.rules-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.rules-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 193, 7, 0.18);
+}
+
+.rules-title {
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.rules-text {
+  font-size: 13px;
+  color: var(--fs-muted);
+  line-height: 1.4;
+}
+
+/* ================= Main ================= */
+.forum-title {
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+.sort-label {
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--fs-muted);
+}
+
+.sort-select {
+  width: 160px;
+}
+
+/* ================= Topics ================= */
+.topics-title {
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.topic-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 210px;
+  gap: 14px;
+
+  padding: 14px 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.topic-row:first-of-type {
+  border-top: 0;
+}
+
+/* Tag catégorie (badge à gauche) */
+.topic-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--fs-radius-pill);
+  background: rgba(47, 107, 79, 0.10);
+  color: var(--fs-green);
+  font-weight: 900;
+  font-size: 12px;
+  width: fit-content;
+}
+
+/* Col centrale */
+.topic-main {
+  display: flex;
+  gap: 12px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.topic-title {
+  font-weight: 900;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: var(--fs-text);
+}
+
+.topic-meta {
+  font-size: 12px;
+}
+
+/* Col droite */
+.topic-side {
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+}
+
+.topic-replies {
+  font-weight: 900;
+  color: var(--fs-text);
+  font-size: 12px;
+}
+
+.topic-badge {
+  background: var(--fs-green);
+  color: var(--fs-white);
+  border-radius: var(--fs-radius-sm);
+  padding: 4px 10px;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.topic-last {
+  font-size: 12px;
+}
+
+/* ================= Pagination (cohérent avec dons/recettes) ================= */
+.pagination-wrap .page-link {
+  border-radius: var(--fs-radius-sm);
+  border: 1px solid var(--fs-border);
+  color: var(--fs-green);
+  font-weight: 800;
+}
+
+.pagination-wrap .page-item.active .page-link {
+  background: var(--fs-green);
+  border-color: var(--fs-green);
+  color: var(--fs-white);
+}
+
+.pagination-wrap .page-item.disabled .page-link {
+  opacity: 0.5;
+  color: var(--fs-text);
+}
+
+.pagination-wrap .page-item:not(.active):not(.disabled) .page-link:hover {
+  background: var(--fs-hover-bg, rgba(47, 107, 79, 0.06));
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 992px) {
+  .topic-row {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-side {
+    justify-items: start;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 10px;
+  }
+
+  .sort-select {
+    width: 100%;
+  }
+}

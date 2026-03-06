@@ -1,0 +1,158 @@
+/* =======================================================
+   AUTH SHELL (layout 2 colonnes)
+   - Col gauche : bloc marketing (icône personne+)
+   - Col droite : formulaire (style image 1)
+   ======================================================= */
+
+.auth-page {
+  min-height: 100vh;
+  background: var(--fs-bg);
+  display: flex;
+  align-items: center;
+}
+
+/* Grille principale */
+.auth-grid {
+  overflow: hidden;
+  border-radius: var(--fs-radius-lg);
+  background: var(--fs-surface);
+  box-shadow: var(--fs-shadow-md);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 900px;
+}
+
+/* ================= LEFT ================= */
+.auth-left {
+  /* Fond “premium” comme l’image 2 (adapté FoodShare) */
+  background: linear-gradient(135deg, rgba(47, 107, 79, 0.90), rgba(47, 107, 79, 0.78));
+  color: var(--fs-white);
+  position: relative;
+}
+
+.auth-left__inner {
+  height: 100%;
+  padding: 38px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.16);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.brand__name {
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  font-size: 20px;
+  opacity: 0.95;
+}
+
+/* Marketing hero */
+.hero__icon {
+  width: 78px;
+  height: 78px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.16);
+ 
+  // place-items: center;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+
+  i {
+    font-size: 64px;
+    opacity: 0.95;
+  }
+}
+
+.hero__title {
+  font-weight: 900;
+  margin: 16px 0 6px;
+  font-size: 50px;
+}
+
+.hero__text {
+  margin: 0;
+  opacity: 0.92;
+  max-width: 340px;
+  line-height: 1.5;
+  font-size: 20px;
+}
+
+.hero__bullets {
+  list-style: none;
+  padding: 2px;
+  margin: 18px 0 0;
+  display: grid;
+  gap: 10px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    padding: 10px 12px;
+    font-weight: 700;
+    font-size: 23px;
+
+    i {
+      font-size: 16px;
+      opacity: 0.95;
+    }
+  }
+}
+
+/* ================= RIGHT ================= */
+.auth-right {
+  background: var(--fs-surface);
+}
+
+.auth-right__inner {
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid green;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 992px) {
+  .auth-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-left__inner {
+    padding: 28px 22px;
+  }
+
+  .auth-right__inner {
+    padding: 28px 22px;
+  }
+
+  .hero__title {
+    font-size: 26px;
+  }
+}

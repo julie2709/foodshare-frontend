@@ -1,0 +1,40 @@
+/* src/styles/_typography.scss */
+html, body {
+  font-family: var(--fs-font-sans);
+  font-size: var(--fs-text-base);
+  line-height: var(--fs-line);
+  color: var(--fs-text);
+  background: var(--fs-bg);
+}
+
+/* Titres */
+.section-title {
+  font-family: var(--fs-font-title);
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: var(--fs-text);
+}
+
+/* Hero */
+.hero-title {
+  font-family: var(--fs-font-title);
+  font-weight: 900;
+  letter-spacing: -0.2px;
+  color: var(--fs-text);
+}
+
+.hero-subtitle {
+  color: var(--fs-muted);
+}
+
+/* Lien standard */
+.link-fs {
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--fs-green);
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
