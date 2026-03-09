@@ -17,6 +17,6 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   ping(): Observable<PingResponse> {
-    return this.http.get<PingResponse>(`${this.baseUrl}/api/ping`);
+    return this.http.get<PingResponse>(`${this.baseUrl}/ping`);
   }
 }
