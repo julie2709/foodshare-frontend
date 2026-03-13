@@ -1,26 +1,28 @@
 <div class="container pt-4 pb-5">
-     <!-- ================= HERO (identité / marketing) ================= -->
+  <!-- ================= HERO (identité / marketing) ================= -->
   <div class="hero card-soft p-3 p-lg-4">
     <div class="row g-4">
 
       <!-- Texte -->
       <div class="col-lg-5 hero-content d-flex flex-column justify-content-center">
         <h1 class="hero-title">
-          Partageaons des recettes et,
+          Partageons des recettes et,
           <span class="highlight">luttons contre le gaspillage alimentaire</span>
         </h1>
 
         <p class="hero-subtitle">
-          Découvrer des recettes faciles et savoureuses à préparer à partir des dons alimentaires et restes
+          Découvrez des recettes faciles et savoureuses à préparer à partir des dons alimentaires et restes
         </p>
 
         <div class="hero-actions">
           <a routerLink="/dons" class="btn btn-fs px-4">Voir les dons</a>
-          <a routerLink="/connexion" class="btn btn-outline-success px-4">Découvrir des recettes</a>
+          <a routerLink="/dons" class="btn btn-outline-success px-4">Trouver des ingrédients</a>
         </div>
       </div>
 
       <!-- Image -->
+      <!-- Ici tu peux garder une image statique car c'est une image de bannière,
+           pas une donnée métier venant de l'API -->
       <div class="col-lg-7">
         <div class="hero-image">
           <img src="assets/recipes/receipe4.jpg" alt="Recettes poulet" />
@@ -30,165 +32,212 @@
     </div>
   </div>
 
-  <div class="container pt-4 pb-5 recipes-page">
+  <!-- ================= CONTENU PAGE RECETTES ================= -->
+  <div class="pt-4 pb-5 recipes-page">
 
-  <!-- ================= FILTER BAR =================
-       - Compteur à gauche
-       - Tri au centre/droite
-       - Recherche + selects + reset
-  ================================================ -->
-  <div class="card-soft p-3 p-lg-4 recipes-filter">
-    <div class="d-flex flex-column gap-3">
+    <!-- ================= FILTER BAR =================
+         - Compteur à gauche
+         - Tri à droite
+         - Recherche + selects + reset
+    ================================================ -->
+    <div class="card-soft p-3 p-lg-4 recipes-filter">
+      <div class="d-flex flex-column gap-3">
 
-      <!-- Top row : count + sort -->
-      <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2">
-        <div class="recipes-count">
-          <i class="bi bi-journal-text me-2"></i>
-          <strong>{{ totalFiltered }}</strong> recettes
-        </div>
+        <!-- Top row : count + sort -->
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2">
+          <div class="recipes-count">
+            <i class="bi bi-journal-text me-2"></i>
+            <strong>{{ totalFiltered }}</strong> recettes
+          </div>
 
-        <div class="d-flex align-items-center gap-2">
-          <label class="filter-label mb-0">Trier par:</label>
-          <select class="form-select form-select-sm sort-select" [(ngModel)]="filters.sort" name="sort" (change)="applyFilters()">
-            <option value="recent">Plus récent</option>
-            <option value="timeAsc">Temps (croissant)</option>
-            <option value="timeDesc">Temps (décroissant)</option>
-            <option value="title">Titre (A → Z)</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Search row -->
-      <div class="row g-2 align-items-center">
-        <div class="col-12 col-lg-8">
-          <div class="search-wrap">
-            <i class="bi bi-search"></i>
-            <input
-              class="form-control search-input"
-              placeholder="Rechercher une recette ou un ingrédient..."
-              [(ngModel)]="filters.q"
-              name="q"
-              (ngModelChange)="onTyping()"
-            />
+          <div class="d-flex align-items-center gap-2">
+            <label class="filter-label mb-0">Trier par :</label>
+            <select
+              class="form-select form-select-sm sort-select"
+              [(ngModel)]="filters.sort"
+              name="sort"
+              (change)="applyFilters()"
+            >
+              <option value="recent">Plus récent</option>
+              <option value="timeAsc">Temps (croissant)</option>
+              <option value="timeDesc">Temps (décroissant)</option>
+              <option value="title">Titre (A → Z)</option>
+            </select>
           </div>
         </div>
 
-        <div class="col-12 col-lg-4 d-grid d-lg-flex justify-content-lg-end">
-          <button class="btn btn-outline-success reset-btn" type="button" (click)="resetFilters()">
-            <i class="bi bi-arrow-counterclockwise me-2"></i>
-            Réinitialiser
-          </button>
-        </div>
-      </div>
+        <!-- Search row -->
+        <div class="row g-2 align-items-center">
+          <div class="col-12 col-lg-8">
+            <div class="search-wrap">
+              <i class="bi bi-search"></i>
+              <input
+                class="form-control search-input"
+                placeholder="Rechercher une recette ou un ingrédient..."
+                [(ngModel)]="filters.q"
+                name="q"
+                (ngModelChange)="onTyping()"
+              />
+            </div>
+          </div>
 
-      <!-- Select row -->
-      <div class="row g-2">
-        <div class="col-12 col-md-4">
-          <select class="form-select" [(ngModel)]="filters.category" name="category" (change)="applyFilters()">
-            <option value="">Catégorie</option>
-            <option value="plat">Plat</option>
-            <option value="salade">Salade</option>
-            <option value="dessert">Dessert</option>
-            <option value="soupe">Soupe</option>
-            <option value="snack">Snack</option>
-          </select>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <select class="form-select" [(ngModel)]="filters.time" name="time" (change)="applyFilters()">
-            <option value="">Temps</option>
-            <option value="15">≤ 15 min</option>
-            <option value="30">≤ 30 min</option>
-            <option value="45">≤ 45 min</option>
-            <option value="60">≤ 60 min</option>
-          </select>
+          <div class="col-12 col-lg-4 d-grid d-lg-flex justify-content-lg-end">
+            <button
+              class="btn btn-outline-success reset-btn"
+              type="button"
+              (click)="resetFilters()"
+            >
+              <i class="bi bi-arrow-counterclockwise me-2"></i>
+              Réinitialiser
+            </button>
+          </div>
         </div>
 
-        <div class="col-12 col-md-4">
-          <select class="form-select" [(ngModel)]="filters.difficulty" name="difficulty" (change)="applyFilters()">
-            <option value="">Difficulté</option>
-            <option value="Facile">Facile</option>
-            <option value="Moyen">Moyen</option>
-            <option value="Difficile">Difficile</option>
-          </select>
+        <!-- Select row -->
+        <div class="row g-2">
+          <div class="col-12 col-md-4">
+            <select
+              class="form-select"
+              [(ngModel)]="filters.category"
+              name="category"
+              (change)="applyFilters()"
+            >
+              <option value="">Catégorie</option>
+              <option value="plat">Plat</option>
+              <option value="salade">Salade</option>
+              <option value="dessert">Dessert</option>
+              <option value="soupe">Soupe</option>
+              <option value="snack">Snack</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <select
+              class="form-select"
+              [(ngModel)]="filters.time"
+              name="time"
+              (change)="applyFilters()"
+            >
+              <option value="">Temps</option>
+              <option value="15">≤ 15 min</option>
+              <option value="30">≤ 30 min</option>
+              <option value="45">≤ 45 min</option>
+              <option value="60">≤ 60 min</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <select
+              class="form-select"
+              [(ngModel)]="filters.difficulty"
+              name="difficulty"
+              (change)="applyFilters()"
+            >
+              <option value="">Difficulté</option>
+              <option value="Facile">Facile</option>
+              <option value="Moyen">Moyen</option>
+              <option value="Difficile">Difficile</option>
+            </select>
+          </div>
         </div>
-      </div>
 
-    </div>
-  </div>
-
-
-  <!-- ================= GRID RESULTS ================= -->
- 
-  <div class="row g-2 mt-3 p-3 results card-soft">
-  <div class="row  g-3 mt-3">
-    <div class="col-12">
-      <h2 class="section-title">Listes des recettes </h2>
-    </div>
-   
-      <div class="col-12 col-sm-6 col-lg-4" *ngFor="let item of pagedRecipes">
-    <div class="card card-listing h-100 listing-card">
-
-      <img [src]="item.image"
-           class="card-img-top"
-           [alt]="item.title"
-           loading="lazy" />
-
-      <div class="card-body d-flex flex-column">
-
-        <h3 class="card-title">{{ item.title }}</h3>
-
-        <div class="meta text-muted">
-          <span class="me-3">
-                <i class="bi bi-clock me-1"></i>{{ item.timeMin }} min
-              </span>
-              <span>
-                <i class="bi bi-award me-1"></i>{{ item.difficulty }}
-              </span>
-
-        </div>
-
-        <!-- Spacer pour pousser le footer en bas -->
-        <div class="mt-auto d-flex align-items-center justify-content-between pt-3">
-
-          <span
-            class="badge badge-soft"
-            [ngClass]="{
-              'badge-soft--success': item.title === 'Disponible',
-              'badge-soft--warning': item.title === 'Réservée',
-              'badge-soft--neutral': item.title === 'Donnée'
-            }"
-          >
-            {{ item.title }}
-          </span>
-
-          <a class="link-fs">Voir les détails</a>
-
-        </div>
       </div>
     </div>
+
+    <!-- ================= GRID RESULTS ================= -->
+    <div class="row g-2 mt-3 p-3 results card-soft">
+      <div class="row g-3 mt-3">
+        <div class="col-12">
+          <h2 class="section-title">Liste des recettes</h2>
+        </div>
+
+        <!-- Chargement -->
+        <div *ngIf="loading" class="col-12 text-muted py-4">
+          Chargement des recettes...
+        </div>
+
+        <!-- Erreur -->
+        <div *ngIf="!loading && errorMessage" class="col-12 alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Aucun résultat -->
+        <div *ngIf="!loading && !errorMessage && pagedRecipes.length === 0" class="col-12 text-muted py-4">
+          Aucune recette ne correspond à votre recherche.
+        </div>
+
+        <!-- Cartes -->
+        <div class="col-12 col-sm-6 col-lg-4" *ngFor="let item of pagedRecipes">
+          <div class="card card-listing h-100 listing-card">
+
+            <!-- ================= IMAGE DE LA RECETTE =================
+                 - Si une image existe, on l'affiche
+                 - Sinon, on affiche un bloc neutre
+                 - Cela évite d'utiliser une image statique de secours
+            ======================================================= -->
+            <ng-container *ngIf="item.image; else noRecipeImage">
+              <img
+                [src]="item.image!"
+                class="card-img-top"
+                [alt]="item.title"
+                loading="lazy"
+              />
+            </ng-container>
+
+            <ng-template #noRecipeImage>
+              <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted">
+                Aucune photo disponible
+              </div>
+            </ng-template>
+
+            <div class="card-body d-flex flex-column">
+              <h3 class="card-title">{{ item.title }}</h3>
+
+              <div class="meta text-muted">
+                <span class="me-3">
+                  <i class="bi bi-clock me-1"></i>{{ item.timeMin }} min
+                </span>
+                <span>
+                  <i class="bi bi-award me-1"></i>{{ item.difficulty || 'Non précisée' }}
+                </span>
+              </div>
+
+              <div class="mt-auto d-flex align-items-center justify-content-between pt-3">
+                <span class="badge badge-soft badge-soft--success">
+                  {{ item.category || 'plat' }}
+                </span>
+
+                <a class="link-fs" [routerLink]="['/recettes', item.id]">
+                  Voir les détails
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= PAGINATION ================= -->
+    <nav
+      class="pagination-wrap mt-4"
+      aria-label="Pagination recettes"
+      *ngIf="!loading && !errorMessage && totalPages > 1"
+    >
+      <ul class="pagination justify-content-center mb-0">
+        <li class="page-item" [class.disabled]="page === 1">
+          <button class="page-link" type="button" (click)="goToPage(page - 1)">‹</button>
+        </li>
+
+        <li class="page-item" *ngFor="let p of pages" [class.active]="p === page">
+          <button class="page-link" type="button" (click)="goToPage(p)">{{ p }}</button>
+        </li>
+
+        <li class="page-item" [class.disabled]="page === totalPages">
+          <button class="page-link" type="button" (click)="goToPage(page + 1)">›</button>
+        </li>
+      </ul>
+    </nav>
+
   </div>
-    
-  </div>
-</div>
-
-
-  <!-- ================= PAGINATION ================= -->
-  <nav class="pagination-wrap mt-4" aria-label="Pagination recettes" *ngIf="totalPages > 1">
-    <ul class="pagination justify-content-center mb-0">
-      <li class="page-item" [class.disabled]="page === 1">
-        <button class="page-link" type="button" (click)="goToPage(page - 1)">‹</button>
-      </li>
-
-      <li class="page-item" *ngFor="let p of pages" [class.active]="p === page">
-        <button class="page-link" type="button" (click)="goToPage(p)">{{ p }}</button>
-      </li>
-
-      <li class="page-item" [class.disabled]="page === totalPages">
-        <button class="page-link" type="button" (click)="goToPage(page + 1)">›</button>
-      </li>
-    </ul>
-  </nav>
-
-</div>
 </div>

@@ -82,30 +82,60 @@
       <a routerLink="/dons" class="link-fs">Voir tout</a>
     </div>
 
-    <div class="row g-3">
+    <!-- État de chargement -->
+    <div *ngIf="loadingListings" class="text-muted py-4">
+      Chargement des dons...
+    </div>
+
+    <!-- Message d'erreur -->
+    <div *ngIf="!loadingListings && listingsError" class="alert alert-danger">
+      {{ listingsError }}
+    </div>
+
+    <!-- Aucun résultat -->
+    <div *ngIf="!loadingListings && !listingsError && recentListings.length === 0" class="text-muted py-4">
+      Aucun don disponible pour le moment.
+    </div>
+
+    <!-- Liste des dons -->
+    <div class="row g-3" *ngIf="!loadingListings && !listingsError && recentListings.length > 0">
       <div class="col-12 col-sm-6 col-lg-3" *ngFor="let item of recentListings">
 
         <div class="card card-listing h-100">
-          <img [src]="item.image" class="card-img-top" [alt]="item.title" />
+
+          <!-- Image dynamique du don -->
+          <ng-container *ngIf="getListingImage(item) as imageUrl; else noListingImage">
+            <img [src]="imageUrl" class="card-img-top" [alt]="item.title" />
+          </ng-container>
+
+          <!-- Fallback visuel si aucune photo n'existe -->
+          <ng-template #noListingImage>
+            <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted">
+              Aucune photo disponible
+            </div>
+          </ng-template>
 
           <div class="card-body">
             <h3 class="card-title">{{ item.title }}</h3>
 
             <div class="meta text-muted">
-              <span class="me-2">📍 {{ item.city }}</span>
-              <span>• Jusqu’au {{ item.expiry }}</span>
+              <span class="me-2">
+                📍 {{ item.city || 'Ville non précisée' }}
+                <ng-container *ngIf="item.postalCode">({{ item.postalCode }})</ng-container>
+              </span>
+              <span>• Jusqu’au {{ formatExpiry(item.expiryDate) }}</span>
             </div>
 
             <div class="mt-3">
               <span
                 class="badge badge-soft"
                 [ngClass]="{
-                  'badge-soft--success': item.status === 'Disponible',
-                  'badge-soft--warning': item.status === 'Réservée',
-                  'badge-soft--neutral': item.status === 'Donnée'
+                  'badge-soft--success': item.status === 'DISPONIBLE',
+                  'badge-soft--warning': item.status === 'RESERVEE',
+                  'badge-soft--neutral': item.status === 'DONNEE'
                 }"
               >
-                {{ item.status }}
+                {{ getDisplayStatus(item.status) }}
               </span>
             </div>
 
@@ -124,10 +154,38 @@
       <a routerLink="/recettes" class="link-fs">Explorer</a>
     </div>
 
-    <div class="row g-3">
+    <!-- État de chargement -->
+    <div *ngIf="loadingRecipes" class="text-muted py-4">
+      Chargement des recettes...
+    </div>
+
+    <!-- Message d'erreur -->
+    <div *ngIf="!loadingRecipes && recipesError" class="alert alert-danger">
+      {{ recipesError }}
+    </div>
+
+    <!-- Aucun résultat -->
+    <div *ngIf="!loadingRecipes && !recipesError && recipes.length === 0" class="text-muted py-4">
+      Aucune recette disponible pour le moment.
+    </div>
+
+    <!-- Liste des recettes -->
+    <div class="row g-3" *ngIf="!loadingRecipes && !recipesError && recipes.length > 0">
       <div class="col-12 col-sm-6 col-lg-3" *ngFor="let r of recipes">
         <div class="card card-recipe h-100">
-          <img [src]="r.image" class="card-img-top" [alt]="r.title" />
+
+          <!-- Image dynamique de la recette -->
+          <ng-container *ngIf="r.image as imageUrl; else noRecipeImage">
+            <img [src]="imageUrl" class="card-img-top" [alt]="r.title" />
+          </ng-container>
+
+          <!-- Fallback visuel si aucune photo n'existe -->
+          <ng-template #noRecipeImage>
+            <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted">
+              Aucune photo disponible
+            </div>
+          </ng-template>
+
           <div class="card-body">
             <h3 class="card-title">{{ r.title }}</h3>
           </div>

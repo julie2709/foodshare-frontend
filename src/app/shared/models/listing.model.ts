@@ -1,7 +1,7 @@
-// Interface pour un Listing reçu dpuis l'API
 export interface ListingPhoto {
   id: number;
   url: string;
+  publicUrl?: string;
 }
 
 export interface Listing {
@@ -16,10 +16,10 @@ export interface Listing {
   pickupInfo: string | null;
   status: 'DISPONIBLE' | 'RESERVEE' | 'DONNEE';
   createdAt: string;
-  listingPhotos: ListingPhoto[];
+  photos: ListingPhoto[];
+  user?: unknown | null;
 }
 
-// Données envoyés par l formulaire
 export interface CreateListingPayload {
   title: string;
   category: string;
@@ -32,7 +32,6 @@ export interface CreateListingPayload {
   photo: File;
 }
 
-// Permet de préparer la modification d'un don plus tard
 export interface UpdateListingPayload {
   title?: string;
   category?: string;

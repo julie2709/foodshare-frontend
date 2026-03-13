@@ -1,56 +1,49 @@
 <div class="container pt-4 pb-5">
-
-  <!-- ================= HERO (identité / marketing) ================= -->
+  <!-- ================= HERO ================= -->
   <div class="hero card-soft p-3 p-lg-4">
     <div class="row g-4">
-
-      <!-- Texte -->
-      <div class="col-lg-6 hero-content d-flex flex-column justify-content-center">
+      <div
+        class="col-lg-6 hero-content d-flex flex-column justify-content-center"
+      >
         <h1 class="hero-title">
           Donnez ce que vous n’utilisez plus,
           <span class="highlight">récupérez près de chez vous</span>
         </h1>
 
         <p class="hero-subtitle">
-          Une plateforme solidaire pour réduire le gaspillage alimentaire
-          et aider votre communauté locale.
+          Une plateforme solidaire pour réduire le gaspillage alimentaire et
+          aider votre communauté locale.
         </p>
 
         <div class="hero-actions">
           <a routerLink="/dons" class="btn btn-fs px-4">Voir les dons</a>
-          <a routerLink="/connexion" class="btn btn-outline-success px-4">Publier un don</a>
+          <a routerLink="/connexion" class="btn btn-outline-success px-4"
+            >Publier un don</a
+          >
         </div>
       </div>
 
-      <!-- Image -->
       <div class="col-lg-6">
         <div class="hero-image">
           <img src="assets/hero/hero2.jpg" alt="Don alimentaire" />
         </div>
       </div>
-
     </div>
   </div>
 
-
-  <!-- ================= FILTRE RAPIDE (haut) =================
-       Objectif : filtrer vite sans aller dans la sidebar
-  ============================================================ -->
+  <!-- ================= FILTRE RAPIDE ================= -->
   <div class="card-soft p-3 p-lg-4 mb-4">
     <div class="row g-3 align-items-center">
-
-      <!-- Titre page -->
       <div class="col-12 col-lg-7">
         <h1 class="page-title mb-2">Dons</h1>
         <p class="page-subtitle mb-0">
-          Trouvez des dons près de chez vous et réduisons le gaspillage ensemble.
+          Trouvez des dons près de chez vous et réduisons le gaspillage
+          ensemble.
         </p>
       </div>
 
-      <!-- Formulaire rapide -->
       <div class="col-12 col-lg-5">
         <form class="row g-2" (ngSubmit)="applyFilters()">
-
           <div class="col-12">
             <input
               class="form-control"
@@ -61,7 +54,11 @@
           </div>
 
           <div class="col-6">
-            <select class="form-select" [(ngModel)]="quick.category" name="quick_category">
+            <select
+              class="form-select"
+              [(ngModel)]="quick.category"
+              name="quick_category"
+            >
               <option value="">Catégorie</option>
               <option value="fruits">Fruits</option>
               <option value="legumes">Légumes</option>
@@ -83,26 +80,20 @@
           <div class="col-12 d-grid">
             <button class="btn btn-fs" type="submit">Rechercher</button>
           </div>
-
         </form>
       </div>
-
     </div>
   </div>
 
-
-  <!-- ================= MAIN LAYOUT: SIDEBAR + RÉSULTATS ================= -->
-  <div class="row g-4 dons-layout align-items-stretch border bordr-success">
-
-    <!-- ================= SIDEBAR : FILTRE COMPLET ================= -->
-    <aside class="col-12 col-lg-3 d-flex border border-danger">
+  <!-- ================= MAIN LAYOUT ================= -->
+  <div class="row g-4 dons-layout align-items-stretch">
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="col-12 col-lg-3 d-flex">
       <div class="filters card-soft p-3 w-100 d-flex flex-column gap-2">
-
         <div class="filters__header mb-3">
           <h2 class="filters__title mb-0">Filtres</h2>
         </div>
 
-        <!-- Recherche avancée -->
         <div class="mb-3">
           <label class="filters__label">Recherche</label>
           <input
@@ -113,10 +104,13 @@
           />
         </div>
 
-        <!-- Catégorie -->
         <div class="mb-3">
           <label class="filters__label">Catégorie</label>
-          <select class="form-select" [(ngModel)]="filters.category" name="filters_category">
+          <select
+            class="form-select"
+            [(ngModel)]="filters.category"
+            name="filters_category"
+          >
             <option value="">Toutes</option>
             <option value="fruits">Fruits</option>
             <option value="legumes">Légumes</option>
@@ -126,7 +120,6 @@
           </select>
         </div>
 
-        <!-- Ville -->
         <div class="mb-3">
           <label class="filters__label">Ville</label>
           <input
@@ -137,17 +130,18 @@
           />
         </div>
 
-        <!-- Tri -->
         <div class="mb-3">
           <label class="filters__label">Trier par</label>
-          <select class="form-select" [(ngModel)]="filters.sort" name="filters_sort">
+          <select
+            class="form-select"
+            [(ngModel)]="filters.sort"
+            name="filters_sort"
+          >
             <option value="recent">Plus récent</option>
             <option value="expiry">Expiration la plus proche</option>
-            <option value="distance">Distance</option>
           </select>
         </div>
 
-        <!-- Disponible uniquement -->
         <div class="form-check mb-3">
           <input
             class="form-check-input"
@@ -161,82 +155,143 @@
           </label>
         </div>
 
-        <!-- Actions (collées en bas grâce à mt-auto) -->
         <div class="mt-auto d-grid gap-3">
           <button class="btn btn-fs" type="button" (click)="applyFilters()">
             Appliquer
           </button>
-          <button class="btn btn-outline-success" type="button" (click)="resetFilters()">
+          <button
+            class="btn btn-outline-success"
+            type="button"
+            (click)="resetFilters()"
+          >
             Réinitialiser
           </button>
         </div>
-
       </div>
     </aside>
-
 
     <!-- ================= RÉSULTATS ================= -->
     <section class="col-12 col-lg-9 d-flex">
       <div class="results card-soft p-3 w-100 d-flex flex-column">
-
         <div class="d-flex align-items-center justify-content-between mb-3">
           <h2 class="section-title mb-0">Résultats</h2>
-          <span class="results-count text-muted">{{ filteredListings.length }} dons</span>
+          <span class="results-count text-muted"
+            >{{ filteredAll.length }} dons</span
+          >
+        </div>
+
+        <div *ngIf="loading" class="text-muted py-4">
+          Chargement des dons...
+        </div>
+
+        <div *ngIf="!loading && errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <div
+          *ngIf="!loading && !errorMessage && filteredListings.length === 0"
+          class="text-muted py-4"
+        >
+          Aucun don ne correspond à votre recherche.
         </div>
 
         <!-- Grid cards -->
-        <div class="row g-3">
-          <div class="col-12 col-sm-6 col-lg-4" *ngFor="let item of filteredListings">
+        <div
+          class="row g-3"
+          *ngIf="!loading && !errorMessage && filteredListings.length > 0"
+        >
+          <div
+            class="col-12 col-sm-6 col-lg-4"
+            *ngFor="let item of filteredListings"
+          >
             <div class="card card-listing h-100">
-              <img [src]="item.image" class="card-img-top" [alt]="item.title" />
+              <ng-container
+                *ngIf="getListingImage(item) as imageUrl; else noImage"
+              >
+                <img [src]="imageUrl" class="card-img-top" [alt]="item.title" />
+              </ng-container>
+
+              <ng-template #noImage>
+                <div
+                  class="card-img-top d-flex align-items-center justify-content-center text-muted bg-light"
+                >
+                  Aucune photo disponible
+                </div>
+              </ng-template>
 
               <div class="card-body">
                 <h3 class="card-title">{{ item.title }}</h3>
 
                 <div class="meta text-muted">
-                  <span class="me-2">📍 {{ item.city }}</span>
-                  <span>• Jusqu’au {{ item.expiry }}</span>
+                  <span class="me-2">
+                    📍 {{ item.city || "Lyon" }}
+                    <ng-container *ngIf="item.postalCode"
+                      >({{ item.postalCode }})</ng-container
+                    >
+                  </span>
+                  <span>• Jusqu’au {{ formatExpiry(item.expiryDate) }}</span>
                 </div>
 
-                <div class="mt-3 d-flex align-items-center justify-content-between">
+                <div
+                  class="mt-3 d-flex align-items-center justify-content-between"
+                >
                   <span
                     class="badge badge-soft"
                     [ngClass]="{
-                      'badge-soft--success': item.status === 'Disponible',
-                      'badge-soft--warning': item.status === 'Réservée',
-                      'badge-soft--neutral': item.status === 'Donnée'
+                      'badge-soft--success': item.status === 'DISPONIBLE',
+                      'badge-soft--warning': item.status === 'RESERVEE',
+                      'badge-soft--neutral': item.status === 'DONNEE',
                     }"
                   >
-                    {{ item.status }}
+                    {{ getDisplayStatus(item.status) }}
                   </span>
 
                   <a class="link-fs" [routerLink]="['/dons', item.id]">Voir</a>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
 
         <!-- Pagination -->
-        <nav class="pagination-wrap mt-4" aria-label="Pagination dons">
+        <nav
+          class="pagination-wrap mt-4"
+          aria-label="Pagination dons"
+          *ngIf="!loading && !errorMessage && totalPages > 1"
+        >
           <ul class="pagination justify-content-center mb-0">
             <li class="page-item" [class.disabled]="page === 1">
-              <button class="page-link" type="button" (click)="goToPage(page - 1)">‹</button>
+              <button
+                class="page-link"
+                type="button"
+                (click)="goToPage(page - 1)"
+              >
+                ‹
+              </button>
             </li>
 
-            <li class="page-item" *ngFor="let p of pages" [class.active]="p === page">
-              <button class="page-link" type="button" (click)="goToPage(p)">{{ p }}</button>
+            <li
+              class="page-item"
+              *ngFor="let p of pages"
+              [class.active]="p === page"
+            >
+              <button class="page-link" type="button" (click)="goToPage(p)">
+                {{ p }}
+              </button>
             </li>
 
             <li class="page-item" [class.disabled]="page === totalPages">
-              <button class="page-link" type="button" (click)="goToPage(page + 1)">›</button>
+              <button
+                class="page-link"
+                type="button"
+                (click)="goToPage(page + 1)"
+              >
+                ›
+              </button>
             </li>
           </ul>
         </nav>
-
       </div>
     </section>
-
   </div>
 </div>
