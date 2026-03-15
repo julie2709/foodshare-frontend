@@ -1,0 +1,256 @@
+<div class="create-listing-page">
+  <div class="container py-4 py-md-5">
+    <h1 class="page-title">Créer un don alimentaire</h1>
+
+    <div class="listing-card">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- Détails du don -->
+        <section class="form-section">
+          <div class="section-heading">
+            <h2 class="section-title">Détails du don</h2>
+          </div>
+
+          <div class="form-row">
+            <label for="title" class="form-label">
+              Titre du don <span class="required">*</span>
+            </label>
+
+            <div class="field-wrapper">
+              <input
+                id="title"
+                type="text"
+                class="form-control"
+                formControlName="title"
+                placeholder="Ex: Légumes frais à donner"
+                 maxlength="120"
+              />
+
+              <div class="field-error" *ngIf="f['title'].touched && f['title'].hasError('required')">
+                Le titre du don est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="description" class="form-label">Description</label>
+
+            <div class="field-wrapper">
+              <textarea
+                id="description"
+                class="form-control textarea-control"
+                formControlName="description"
+                rows="4"
+                placeholder="Ex: Carottes, courgettes et tomates en surplus"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="category" class="form-label">
+              Catégorie <span class="required">*</span>
+            </label>
+
+            <div class="field-wrapper field-wrapper--select">
+              <select
+                id="category"
+                class="form-control form-select-custom"
+                formControlName="category"
+              >
+                <option value="">Sélectionner une catégorie</option>
+                <option *ngFor="let category of categories" [value]="category">
+                  {{ category }}
+                </option>
+              </select>
+
+              <i class="bi bi-chevron-down select-icon"></i>
+
+              <div class="field-error" *ngIf="f['category'].touched && f['category'].hasError('required')">
+                La catégorie est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="quantity" class="form-label">Quantité</label>
+
+            <div class="field-wrapper">
+              <input
+                id="quantity"
+                type="text"
+                class="form-control"
+                formControlName="quantity"
+                placeholder="Ex: 2 kg"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="expiryDate" class="form-label">
+              Date limite <span class="optional">(optionnelle)</span>
+            </label>
+
+            <div class="field-wrapper field-wrapper--date">
+              <div class="date-input-wrapper">
+                <input
+                  id="expiryDate"
+                  type="date"
+                  class="form-control form-control--date"
+                  formControlName="expiryDate"
+                  [attr.min]="minDate"
+                />
+                <i class="bi bi-calendar3 calendar-icon"></i>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Localisation -->
+        <section class="form-section">
+          <div class="section-heading">
+            <h2 class="section-title">Localisation</h2>
+          </div>
+
+          <div class="form-row">
+            <label for="postalCode" class="form-label">
+              Code postal <span class="required">*</span>
+            </label>
+
+            <div class="field-wrapper">
+              <input
+                id="postalCode"
+                type="text"
+                class="form-control"
+                formControlName="postalCode"
+                placeholder="Ex: 69003"
+                 maxlength="5"
+              />
+
+              <div class="field-error" *ngIf="f['postalCode'].touched && f['postalCode'].hasError('required')">
+                Le code postal est obligatoire.
+              </div>
+
+              <div class="field-error" *ngIf="f['postalCode'].touched && f['postalCode'].hasError('pattern')">
+                Seuls les codes postaux du Rhône sont autorisés (69XXX).
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="city" class="form-label">
+              Ville <span class="optional">(optionnelle)</span>
+            </label>
+
+            <div class="field-wrapper">
+              <input
+                id="city"
+                type="text"
+                class="form-control"
+                formControlName="city"
+                placeholder="Ex: Lyon"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- Infos de récupération -->
+        <section class="form-section">
+          <div class="section-heading">
+            <h2 class="section-title">Infos de récupération</h2>
+          </div>
+
+          <div class="form-row form-row--full">
+            <div class="field-wrapper field-wrapper--full">
+              <textarea
+                class="form-control textarea-control textarea-control--large"
+                formControlName="pickupInfo"
+                rows="5"
+                placeholder="Ex: Disponible en soirée. Remise en main propre."
+              ></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- Photo -->
+        <section class="form-section">
+          <div class="section-heading">
+            <h2 class="section-title">
+              Photo du don <span class="required">*</span>
+            </h2>
+          </div>
+
+          <div class="photo-upload-block">
+            <label
+              class="upload-btn"
+              for="photoInput"
+              [class.is-loading]="isCompressingImage"
+            >
+              <i class="bi bi-camera-fill"></i>
+              <span>
+                {{ isCompressingImage ? 'Compression en cours...' : 'Ajouter une photo' }}
+              </span>
+            </label>
+
+            <input
+              id="photoInput"
+              type="file"
+              hidden
+              accept="image/png,image/jpeg,image/jpg,image/webp"
+              (change)="onFileSelected($event)"
+            />
+
+            <p class="upload-hint">
+              Une photo obligatoire. Elle sera compressée avant l’envoi.
+            </p>
+
+            <div class="field-error text-center" *ngIf="f['photo'].touched && f['photo'].invalid">
+              Une photo est obligatoire.
+            </div>
+
+            <div class="preview-card" *ngIf="imagePreviewUrl">
+              <button
+                type="button"
+                class="remove-photo-btn"
+                (click)="removeImage()"
+                aria-label="Supprimer la photo"
+              >
+                <i class="bi bi-x-lg"></i>
+              </button>
+
+              <img
+                [src]="imagePreviewUrl"
+                alt="Aperçu de la photo du don"
+                class="preview-image"
+              />
+
+              <p class="preview-info">{{ imageInfo }}</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="form-feedback" *ngIf="submitError">
+          {{ submitError }}
+        </div>
+
+        <div class="form-success" *ngIf="submitSuccess">
+          {{ submitSuccess }}
+        </div>
+
+        <div class="actions-row">
+          <button type="button" class="btn btn-cancel" routerLink="/">
+            Annuler
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-submit"
+            [disabled]="isSubmitting || isCompressingImage"
+          >
+            {{ isSubmitting ? 'Publication...' : 'Publier le don' }}
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

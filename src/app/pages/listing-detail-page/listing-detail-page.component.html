@@ -1,0 +1,353 @@
+<div class="container pt-4 pb-5 listing-detail-page">
+  <!-- ================= ÉTAT DE CHARGEMENT ================= -->
+  <div *ngIf="loading" class="card-soft p-4 text-muted">
+    Chargement du don...
+  </div>
+
+  <!-- ================= ÉTAT D'ERREUR ================= -->
+  <div *ngIf="!loading && errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- ================= CONTENU PRINCIPAL ================= -->
+  <div *ngIf="!loading && !errorMessage && listing as item">
+    <!-- ================= EN-TÊTE ================= -->
+    <div
+      class="detail-header d-flex align-items-start justify-content-between gap-3 mb-3"
+    >
+      <div>
+        <h1 class="detail-title mb-2">{{ item.title }}</h1>
+
+        <span [class]="getStatusClass(item.status)">
+          {{ getDisplayStatus(item.status) }}
+        </span>
+      </div>
+
+      <!-- ================= ACTIONS HAUT DROITE ================= -->
+      <div
+        class="detail-actions position-relative"
+        (click)="stopPropagation($event)"
+      >
+        <div class="detail-actions__buttons">
+          <button
+            type="button"
+            class="icon-btn"
+            aria-label="Ajouter aux favoris"
+          >
+            ♡
+          </button>
+          <button type="button" class="icon-btn" aria-label="Partager">
+            ↗
+          </button>
+          <button
+            type="button"
+            class="icon-btn"
+            aria-label="Plus d'actions"
+            (click)="toggleActionsMenu()"
+          >
+            ⋯
+          </button>
+        </div>
+
+        <div class="actions-menu card-soft" *ngIf="actionsMenuOpen">
+          <button
+            type="button"
+            class="actions-menu__item"
+            (click)="editListing()"
+          >
+            Modifier
+          </button>
+          <button
+            type="button"
+            class="actions-menu__item"
+            (click)="deleteListing()"
+          >
+            Supprimer
+          </button>
+          <button
+            type="button"
+            class="actions-menu__item"
+            (click)="reportListing()"
+          >
+            Signaler
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= LAYOUT PRINCIPAL ================= -->
+    <div class="row g-4">
+      <!-- ================= COLONNE GAUCHE ================= -->
+      <div class="col-12 col-lg-8">
+        <div class="card-soft p-3 p-lg-4 main-card">
+          <!-- ================= IMAGE PRINCIPALE ================= -->
+          <div class="detail-image mb-3">
+            <ng-container
+              *ngIf="getListingImage(item) as imageUrl; else noImage"
+            >
+              <img [src]="imageUrl" [alt]="item.title" />
+            </ng-container>
+
+            <ng-template #noImage>
+              <div class="detail-image__placeholder">
+                Aucune photo disponible
+              </div>
+            </ng-template>
+          </div>
+
+          <!-- ================= GALERIE SECONDAIRE ================= -->
+          <div
+            class="gallery-strip mb-4"
+            *ngIf="getListingGallery(item).length > 1"
+          >
+            <div
+              class="gallery-thumb"
+              *ngFor="let photoUrl of getListingGallery(item)"
+            >
+              <img [src]="photoUrl" [alt]="item.title" />
+            </div>
+          </div>
+
+          <!-- ================= TITRE INTERNE ================= -->
+          <h2 class="item-title mb-3">{{ item.title }}</h2>
+
+          <!-- ================= INFORMATIONS PRINCIPALES ================= -->
+          <div class="summary-list mb-4">
+            <div class="summary-item">
+              <span class="summary-item__icon">📍</span>
+              <span>{{ getLocation(item) }}</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-item__icon">🗂</span>
+              <span>Catégorie : {{ getDisplayCategory(item.category) }}</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-item__icon">⚖</span>
+              <span>Quantité : {{ getDisplayQuantity(item.quantity) }}</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-item__icon">🗓</span>
+              <span
+                >Disponible jusqu’au {{ formatExpiry(item.expiryDate) }}</span
+              >
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-item__icon">🕒</span>
+              <span>Publié le {{ formatCreatedAt(item.createdAt) }}</span>
+            </div>
+
+            <div class="summary-item">
+              <span class="summary-item__icon">🏷</span>
+              <span>Statut : {{ getDisplayStatus(item.status) }}</span>
+            </div>
+          </div>
+
+          <!-- ================= DESCRIPTION ================= -->
+          <div class="content-section">
+            <h3 class="section-title-sm">Description</h3>
+            <p class="section-text">
+              {{ getDisplayDescription(item.description) }}
+            </p>
+          </div>
+
+          <!-- ================= RÉCUPÉRATION ================= -->
+          <div class="content-section">
+            <h3 class="section-title-sm">Informations de récupération</h3>
+            <p class="section-text">
+              {{ getDisplayPickupInfo(item.pickupInfo) }}
+            </p>
+          </div>
+
+          <!-- ================= DÉTAILS COMPLÉMENTAIRES ================= -->
+          <div class="content-section">
+            <h3 class="section-title-sm">Détails complémentaires</h3>
+
+            <div class="details-grid">
+              <div class="detail-box">
+                <div class="detail-box__label">Ville</div>
+                <div class="detail-box__value">
+                  {{ getDisplayCity(item.city) }}
+                </div>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-box__label">Code postal</div>
+                <div class="detail-box__value">
+                  {{ getDisplayPostalCode(item.postalCode) }}
+                </div>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-box__label">Catégorie</div>
+                <div class="detail-box__value">
+                  {{ getDisplayCategory(item.category) }}
+                </div>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-box__label">Date de publication</div>
+                <div class="detail-box__value">
+                  {{ formatCreatedAt(item.createdAt) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= PUBLIE PAR ================= -->
+          <div class="publisher-card">
+            <div class="publisher-card__avatar">
+              {{ getPublisherName(item).charAt(0) }}
+            </div>
+
+            <div class="publisher-card__content">
+              <h3 class="publisher-card__title">Publié par</h3>
+              <div class="publisher-card__name">
+                {{ getPublisherName(item) }}
+              </div>
+              <div class="publisher-card__subtitle">
+                {{ getPublisherSubtitle(item) }}
+              </div>
+            </div>
+
+            <div class="publisher-card__stats">
+              <span class="mini-badge">Don solidaire</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= COLONNE DROITE ================= -->
+      <div class="col-12 col-lg-4">
+        <div class="sidebar d-flex flex-column gap-3">
+          <!-- ================= INFOS RAPIDES ================= -->
+          <div class="card-soft p-3 side-card">
+            <span [class]="getStatusClass(item.status)">
+              {{ getDisplayStatus(item.status) }}
+            </span>
+
+            <div class="side-infos mt-3">
+              <div class="side-info-row">
+                <span>📍</span>
+                <span>{{ getLocation(item) }}</span>
+              </div>
+
+              <div class="side-info-row">
+                <span>🗂</span>
+                <span>{{ getDisplayCategory(item.category) }}</span>
+              </div>
+
+              <div class="side-info-row">
+                <span>⚖</span>
+                <span>{{ getDisplayQuantity(item.quantity) }}</span>
+              </div>
+
+              <div class="side-info-row">
+                <span>🗓</span>
+                <span>{{ formatExpiry(item.expiryDate) }}</span>
+              </div>
+
+              <div class="side-info-row">
+                <span>🕒</span>
+                <span>{{ formatCreatedAt(item.createdAt) }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= ACTIONS ================= -->
+          <div class="card-soft p-3 side-card">
+            <ng-container *ngIf="!requestSent; else requestSuccess">
+              <h3 class="side-card__title">Intéressé par ce don ?</h3>
+              <p class="side-card__text">
+                Contactez le donneur ou envoyez une demande pour récupérer ce
+                don.
+              </p>
+
+              <div class="d-grid gap-2">
+                <button
+                  type="button"
+                  class="btn btn-fs"
+                  (click)="sendRequest()"
+                >
+                  Demander ce don
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  (click)="contactDonor()"
+                >
+                  Contacter
+                </button>
+              </div>
+            </ng-container>
+
+            <ng-template #requestSuccess>
+              <div class="request-success">
+                <div class="request-success__icon">✔</div>
+                <h3 class="request-success__title">Demande envoyée</h3>
+                <p class="request-success__text">
+                  Votre demande est en cours de traitement. Le donneur vous
+                  contactera bientôt.
+                </p>
+              </div>
+            </ng-template>
+          </div>
+
+          <!-- ================= RÉCAP RAPIDE ================= -->
+          <div class="card-soft p-3 side-card">
+            <h3 class="side-card__title">Récupération</h3>
+            <p class="side-card__text mb-0">
+              {{ getDisplayPickupInfo(item.pickupInfo) }}
+            </p>
+          </div>
+
+          <!-- ================= AUTRES DONS ================= -->
+          <div class="card-soft p-3 side-card">
+            <h3 class="side-card__title mb-3">Autres dons</h3>
+
+            <div *ngIf="relatedListings.length === 0" class="text-muted small">
+              Aucun autre don similaire pour le moment.
+            </div>
+
+            <div class="related-list" *ngIf="relatedListings.length > 0">
+              <a
+                class="related-item"
+                *ngFor="let related of relatedListings"
+                [routerLink]="['/dons', related.id]"
+              >
+                <div class="related-item__thumb">
+                  <ng-container
+                    *ngIf="
+                      getListingImage(related) as relatedImage;
+                      else relatedNoImage
+                    "
+                  >
+                    <img [src]="relatedImage" [alt]="related.title" />
+                  </ng-container>
+
+                  <ng-template #relatedNoImage>
+                    <div class="related-item__placeholder">Photo</div>
+                  </ng-template>
+                </div>
+
+                <div class="related-item__content">
+                  <div class="related-item__title">{{ related.title }}</div>
+                  <div class="related-item__meta">
+                    {{ related.city || "Ville non précisée" }}
+                  </div>
+                  <div class="related-item__status">
+                    {{ getDisplayStatus(related.status) }}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,8 @@ import { RecipesPageComponent } from './pages/recipes-page/recipes-page.componen
 import { ForumsPageComponent } from './pages/forums-page/forums-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { ListingDetailPageComponent } from './pages/listing-detail-page/listing-detail-page.component';
+import { RecipeDetailPageComponent } from './pages/recipe-detail-page/recipe-detail-page.component';
 
 
 
@@ -14,9 +16,34 @@ export const routes: Routes = [
   { path: 'ping', component: PingComponent },
   { path: '', component: HomePageComponent },
   { path: 'dons', component: ListingsPageComponent },
+  { path: 'dons/:id', component: ListingDetailPageComponent },
   { path: 'recettes', component: RecipesPageComponent },
+  { path: 'recettes/:id', component: RecipeDetailPageComponent },
   { path: 'forum', component: ForumsPageComponent },
   { path: 'connexion', component: LoginPageComponent },
   { path: 'inscription', component: RegisterPageComponent },
+   // authentification
+  { path: 'connexion', component: LoginPageComponent },
+  { path: 'inscription', component: RegisterPageComponent },
+
+  // pages protégées
+  // {
+  //   path: 'publier-un-don',
+  //   component: CreateListingPageComponent,
+  //   canActivate: [authGuard]
+  // },
+
+  // {
+  //   path: 'profil',
+  //   component: ProfilePageComponent,
+  //   canActivate: [authGuard]
+  // },
+
+  // {
+  //   path: 'mes-dons',
+  //   component: MyListingsPageComponent,
+  //   canActivate: [authGuard]
+  // },
+
   { path: '**', redirectTo: '' }
 ];

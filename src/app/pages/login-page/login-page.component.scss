@@ -5,13 +5,14 @@
 .auth-title {
   font-weight: 900;
   text-align: center;
-  margin: 0;
+  margin: 30px 0;
 }
 
 .auth-subtitle {
   text-align: center;
   margin: 10px 0 0;
   line-height: 1.4;
+  font-size: 1.3rem;
 }
 
 /* Input group style */
@@ -21,6 +22,13 @@
   border-right: 0;
   border-radius: var(--fs-radius-sm) 0 0 var(--fs-radius-sm);
   color: var(--fs-muted);
+  font-size: 2.5rem;
+}
+
+.input-group input::placeholder {
+  font-size: 1.2rem;
+  font-family: 'Arial', sans-serif;
+  color: #888;
 }
 
 .form-control {
@@ -34,11 +42,28 @@
   box-shadow: 0 0 0 0.2rem var(--fs-focus);
 }
 
+/* Checkbox + zone remember */
+.form-check-label {
+  font-size: 1rem;
+  color: var(--fs-muted);
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem var(--fs-focus);
+}
+
 /* CTA */
 .auth-submit {
-  border-radius: var(--fs-radius-sm); /* sur auth, on garde plus “card” que pill */
+  border-radius: var(--fs-radius-sm);
   font-weight: 900;
   padding: 12px 16px;
+  width: 90%;
+  margin: 0 auto;
+  display: block;
 }
 
 .auth-divider {

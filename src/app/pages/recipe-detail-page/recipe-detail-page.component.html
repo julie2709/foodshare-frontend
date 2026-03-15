@@ -1,0 +1,116 @@
+<div class="container pt-4 pb-4 recipe-detail-page">
+
+  <!-- Retour -->
+  <div class="mb-3">
+    <a routerLink="/recettes" class="back-link">
+      ← Retour aux recettes
+    </a>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="card-soft p-4 text-muted">
+    Chargement de la recette...
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!loading && errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Détail recette -->
+  <div *ngIf="!loading && !errorMessage && recipe" class="recipe-detail-content">
+
+    <!-- IMAGE HERO PLEINE LARGEUR -->
+    <div class="recipe-hero card-soft overflow-hidden mb-4">
+      <img
+        [src]="getRecipeImage()"
+        [alt]="recipe.title"
+        class="recipe-hero__image"
+      />
+    </div>
+
+    <!-- HEADER INFOS -->
+    <div class="card-soft p-4 mb-4">
+      <div class="recipe-header">
+        <div class="recipe-header__main">
+          <h1 class="recipe-title">{{ recipe.title }}</h1>
+          <p class="recipe-subtitle mb-0">
+            Une recette simple et anti-gaspillage pour valoriser les aliments disponibles.
+          </p>
+        </div>
+
+        <div class="recipe-meta mt-3">
+          <span class="badge badge-soft badge-soft--success">
+            ⏱ {{ recipe.timeMinutes ?? 'Non précisé' }} min
+          </span>
+
+          <span class="badge badge-soft badge-soft--warning">
+            👨‍🍳 {{ recipe.difficulty || 'Non précisée' }}
+          </span>
+
+          <span class="badge badge-soft badge-soft--neutral">
+            📅 {{ formatCreatedAt(recipe.createdAt) }}
+          </span>
+        </div>
+
+        <div *ngIf="getTagsList().length > 0" class="recipe-tags mt-3">
+          <span class="tag-chip" *ngFor="let tag of getTagsList()">
+            {{ tag }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOC CONTENU -->
+    <div class="row g-4">
+
+      <!-- INGREDIENTS -->
+      <div class="col-12 col-lg-4">
+        <div class="card-soft p-4 h-100">
+          <h2 class="section-title">Ingrédients</h2>
+
+          <ul class="ingredients-list" *ngIf="getIngredientsList().length > 0; else noIngredients">
+            <li *ngFor="let ingredient of getIngredientsList()">
+              <span class="ingredient-bullet">•</span>
+              <span>{{ ingredient }}</span>
+            </li>
+          </ul>
+
+          <ng-template #noIngredients>
+            <p class="text-muted mb-0">Aucun ingrédient renseigné.</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- ETAPES -->
+      <div class="col-12 col-lg-8">
+        <div class="card-soft p-4 h-100">
+          <h2 class="section-title">Étapes de préparation</h2>
+
+          <!-- <div *ngIf="getStepsList().length > 0; else noSteps" class="steps-list">
+            <div class="step-item" *ngFor="let step of getStepsList(); let i = index">
+              <div class="step-number">
+                {{ i + 1 }}
+              </div>
+
+              <div class="step-content">
+                {{ step }}
+              </div>
+            </div>
+          </div> -->
+          <ul class="steps-list" *ngIf="getStepsList().length > 0; else noSteps">
+            <li *ngFor="let step of getStepsList()">
+                <span class="step-bullet">•</span>
+                <span>{{ step }}</span>
+            </li>
+          </ul>
+
+          <ng-template #noSteps>
+            <p class="text-muted mb-0">Aucune étape renseignée.</p>
+          </ng-template>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

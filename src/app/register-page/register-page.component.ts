@@ -12,10 +12,11 @@ import { AuthShellComponent } from '../shared/auth-shell/auth-shell.component';
 })
 export class RegisterPageComponent {
   model = {
-    name: '',
+    pseudo: '',
     email: '',
     password: '',
     confirm: '',
+    postalCode: ''
   };
 
   onSubmit(): void {
