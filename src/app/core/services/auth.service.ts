@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, map, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthResponse, LoginPayload, RegisterPayload, User } from '../../shared/models/auth.model';
 
@@ -10,7 +10,7 @@ import { AuthResponse, LoginPayload, RegisterPayload, User } from '../../shared/
 export class AuthService {
   private http = inject(HttpClient);
 
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl; // https://127.0.0.1:8000/api
   private tokenKey = 'token';
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);
@@ -20,7 +20,7 @@ export class AuthService {
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   login(payload: LoginPayload): Observable<User> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, payload).pipe(
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, payload).pipe(
       tap((response) => {
         this.saveToken(response.token);
         this.isAuthenticatedSubject.next(true);
@@ -32,13 +32,13 @@ export class AuthService {
     );
   }
 
-  register(payload: RegisterPayload): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, payload);
+  register(payload: Omit<RegisterPayload, 'confirmPassword'>): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/register`, payload);
   }
 
   getMe(): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/me`);
-  }
+  return this.http.get<User>(`${this.apiUrl}/auth/me`);
+}
 
   initAuth(): Observable<User | null> {
     if (!this.hasToken()) {

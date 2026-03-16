@@ -1,26 +1,25 @@
 <div class="container pt-4 pb-0 b">
-
   <!-- ================= HERO SECTION ================= -->
   <div class="hero card-soft p-3 p-lg-4">
     <div class="row g-4">
-
       <!-- ===== Texte ===== -->
-      <div class="col-lg-6 hero-content d-flex flex-column justify-content-center">
-
+      <div
+        class="col-lg-6 hero-content d-flex flex-column justify-content-center"
+      >
         <h1 class="hero-title">
           Donnez ce que vous n’utilisez plus,
           <span class="highlight">récupérez près de chez vous</span>
         </h1>
 
         <p class="hero-subtitle">
-          Une plateforme solidaire pour réduire le gaspillage alimentaire
-          et aider votre communauté locale.
+          Une plateforme solidaire pour réduire le gaspillage alimentaire et
+          aider votre communauté locale.
         </p>
 
         <!-- Boutons d’action -->
         <div class="hero-actions">
           <a routerLink="/dons" class="btn btn-fs px-4">Voir les dons</a>
-          <a routerLink="/connexion" class="btn btn-outline-success px-4">
+          <a routerLink="/publier-un-don" class="btn btn-outline-success px-4">
             Publier un don
           </a>
         </div>
@@ -32,13 +31,11 @@
           <img src="assets/hero/hero1.jpg" alt="Don alimentaire" />
         </div>
       </div>
-
     </div>
 
     <!-- ===== Barre de recherche ===== -->
     <div class="search-bar card-soft p-2 mt-2">
       <form class="row g-2 align-items-center" (ngSubmit)="onSearch()">
-
         <div class="col-md-5">
           <input
             class="form-control"
@@ -69,11 +66,9 @@
         <div class="col-md-2 d-grid">
           <button class="btn btn-fs">Rechercher</button>
         </div>
-
       </form>
     </div>
   </div>
-
 
   <!-- ================= DONS RÉCENTS ================= -->
   <div class="section mt-5">
@@ -93,24 +88,32 @@
     </div>
 
     <!-- Aucun résultat -->
-    <div *ngIf="!loadingListings && !listingsError && recentListings.length === 0" class="text-muted py-4">
+    <div
+      *ngIf="!loadingListings && !listingsError && recentListings.length === 0"
+      class="text-muted py-4"
+    >
       Aucun don disponible pour le moment.
     </div>
 
     <!-- Liste des dons -->
-    <div class="row g-3" *ngIf="!loadingListings && !listingsError && recentListings.length > 0">
+    <div
+      class="row g-3"
+      *ngIf="!loadingListings && !listingsError && recentListings.length > 0"
+    >
       <div class="col-12 col-sm-6 col-lg-3" *ngFor="let item of recentListings">
-
         <div class="card card-listing h-100">
-
           <!-- Image dynamique du don -->
-          <ng-container *ngIf="getListingImage(item) as imageUrl; else noListingImage">
+          <ng-container
+            *ngIf="getListingImage(item) as imageUrl; else noListingImage"
+          >
             <img [src]="imageUrl" class="card-img-top" [alt]="item.title" />
           </ng-container>
 
           <!-- Fallback visuel si aucune photo n'existe -->
           <ng-template #noListingImage>
-            <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted">
+            <div
+              class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted"
+            >
               Aucune photo disponible
             </div>
           </ng-template>
@@ -120,8 +123,10 @@
 
             <div class="meta text-muted">
               <span class="me-2">
-                📍 {{ item.city || 'Ville non précisée' }}
-                <ng-container *ngIf="item.postalCode">({{ item.postalCode }})</ng-container>
+                📍 {{ item.city || "Ville non précisée" }}
+                <ng-container *ngIf="item.postalCode"
+                  >({{ item.postalCode }})</ng-container
+                >
               </span>
               <span>• Jusqu’au {{ formatExpiry(item.expiryDate) }}</span>
             </div>
@@ -132,20 +137,17 @@
                 [ngClass]="{
                   'badge-soft--success': item.status === 'DISPONIBLE',
                   'badge-soft--warning': item.status === 'RESERVEE',
-                  'badge-soft--neutral': item.status === 'DONNEE'
+                  'badge-soft--neutral': item.status === 'DONNEE',
                 }"
               >
                 {{ getDisplayStatus(item.status) }}
               </span>
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
 
   <!-- ================= IDÉES RECETTES ================= -->
   <div class="section mt-5">
@@ -165,15 +167,20 @@
     </div>
 
     <!-- Aucun résultat -->
-    <div *ngIf="!loadingRecipes && !recipesError && recipes.length === 0" class="text-muted py-4">
+    <div
+      *ngIf="!loadingRecipes && !recipesError && recipes.length === 0"
+      class="text-muted py-4"
+    >
       Aucune recette disponible pour le moment.
     </div>
 
     <!-- Liste des recettes -->
-    <div class="row g-3" *ngIf="!loadingRecipes && !recipesError && recipes.length > 0">
+    <div
+      class="row g-3"
+      *ngIf="!loadingRecipes && !recipesError && recipes.length > 0"
+    >
       <div class="col-12 col-sm-6 col-lg-3" *ngFor="let r of recipes">
         <div class="card card-recipe h-100">
-
           <!-- Image dynamique de la recette -->
           <ng-container *ngIf="r.image as imageUrl; else noRecipeImage">
             <img [src]="imageUrl" class="card-img-top" [alt]="r.title" />
@@ -181,7 +188,9 @@
 
           <!-- Fallback visuel si aucune photo n'existe -->
           <ng-template #noRecipeImage>
-            <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted">
+            <div
+              class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted"
+            >
               Aucune photo disponible
             </div>
           </ng-template>
@@ -194,10 +203,8 @@
     </div>
   </div>
 
-
   <!-- ================= COMMENT ÇA MARCHE ================= -->
   <div class="how-it-works mt-5 mb-5">
-
     <div class="how-title-wrap">
       <span class="line"></span>
       <h2 class="section-title fw-1">Comment ça marche ?</h2>
@@ -205,7 +212,6 @@
     </div>
 
     <div class="row g-4 justify-content-center">
-
       <!-- Étape 1 -->
       <div class="col-12 col-md-4">
         <div class="how-card">
@@ -256,8 +262,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
-
 </div>

@@ -1,9 +1,15 @@
 <app-auth-shell>
-
   <h1 class="auth-title">Connexion</h1>
-  <p class="auth-subtitle text-muted">Ravi de vous revoir ! Connectez-vous à votre compte.</p>
+  <p class="auth-subtitle text-muted">
+    Ravi de vous revoir ! Connectez-vous à votre compte.
+  </p>
 
   <form class="auth-form mt-4" (ngSubmit)="onSubmit()">
+    @if (errorMessage) {
+      <div class="alert alert-danger mb-3">
+        {{ errorMessage }}
+      </div>
+    }
 
     <!-- Email -->
     <div class="input-group mb-3">
@@ -15,6 +21,7 @@
         name="email"
         [(ngModel)]="model.email"
         required
+        [disabled]="loading"
       />
     </div>
 
@@ -28,6 +35,7 @@
         name="password"
         [(ngModel)]="model.password"
         required
+        [disabled]="loading"
       />
     </div>
 
@@ -39,28 +47,40 @@
           type="checkbox"
           [(ngModel)]="model.remember"
           name="remember"
+          [disabled]="loading"
         />
         <span class="form-check-label">Se souvenir de moi</span>
       </label>
 
-      <a routerLink="/mot-de-passe-oublie" class="auth-link">Mot de passe oublié ?</a>
+      <a routerLink="/mot-de-passe-oublie" class="auth-link"
+        >Mot de passe oublié ?</a
+      >
     </div>
 
-    <button class="btn btn-fs w-100 auth-submit" type="submit">
-      Se connecter
+    <button
+      class="btn btn-fs w-100 auth-submit"
+      type="submit"
+      [disabled]="loading"
+    >
+      {{ loading ? "Connexion..." : "Se connecter" }}
     </button>
 
     <div class="auth-divider my-4"></div>
 
     <p class="text-center mb-2 text-muted">Pas encore de compte ?</p>
     <div class="text-center">
-      <a routerLink="/inscription" class="auth-link auth-link--big">Inscription</a>
+      <a routerLink="/inscription" class="auth-link auth-link--big"
+        >Inscription</a
+      >
     </div>
 
-    <button class="btn btn-outline-success w-100 mt-3" type="button" (click)="continueWithGoogle()">
+    <button
+      class="btn btn-outline-success w-100 mt-3"
+      type="button"
+      (click)="continueWithGoogle()"
+      [disabled]="loading"
+    >
       <span class="me-2">G</span> continuer avec Google
     </button>
-
   </form>
-
 </app-auth-shell>

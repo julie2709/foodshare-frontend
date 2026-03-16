@@ -1,12 +1,20 @@
-<app-auth-shell class="border border-danger">
-  <h1 class="auth-title border border-danger">Inscription</h1>
+<app-auth-shell>
+  <h1 class="auth-title">Inscription</h1>
   <p class="auth-subtitle text-muted">
     Rejoignez la communauté FoodShare et commencez à réduire le gaspillage
     alimentaire.
   </p>
 
   <form class="auth-form mt-4" (ngSubmit)="onSubmit()">
-    <!-- Nom -->
+    <div *ngIf="errorMessage" class="alert alert-danger mb-3">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success mb-3">
+      {{ successMessage }}
+    </div>
+
+    <!-- Pseudo -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="bi bi-person"></i></span>
       <input
@@ -16,9 +24,11 @@
         name="pseudo"
         [(ngModel)]="model.pseudo"
         required
+        [disabled]="loading"
       />
     </div>
 
+    <!-- Code postal -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
       <input
@@ -28,8 +38,10 @@
         name="postalCode"
         [(ngModel)]="model.postalCode"
         required
+        [disabled]="loading"
       />
     </div>
+
     <!-- Email -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="bi bi-envelope"></i></span>
@@ -40,10 +52,11 @@
         name="email"
         [(ngModel)]="model.email"
         required
+        [disabled]="loading"
       />
     </div>
 
-    <!-- Password -->
+    <!-- Mot de passe -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="bi bi-key"></i></span>
       <input
@@ -53,10 +66,11 @@
         name="password"
         [(ngModel)]="model.password"
         required
+        [disabled]="loading"
       />
     </div>
 
-    <!-- Confirm -->
+    <!-- Confirmation -->
     <div class="input-group mb-3">
       <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
       <input
@@ -66,11 +80,17 @@
         name="confirm"
         [(ngModel)]="model.confirm"
         required
+        [disabled]="loading"
       />
     </div>
+
     <div class="conteneur-btn w-100 d-flex justify-content-center">
-      <button class="btn btn-fs auth-submit fs-4" type="submit">
-        S'inscrire
+      <button
+        class="btn btn-fs auth-submit fs-4"
+        type="submit"
+        [disabled]="loading"
+      >
+        {{ loading ? "Création..." : "S'inscrire" }}
       </button>
     </div>
 

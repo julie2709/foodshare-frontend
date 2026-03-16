@@ -8,6 +8,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ListingDetailPageComponent } from './pages/listing-detail-page/listing-detail-page.component';
 import { RecipeDetailPageComponent } from './pages/recipe-detail-page/recipe-detail-page.component';
+import { CreateListingPageComponent } from './pages/create-listing-page/create-listing-page.component';
+import { authGuard } from './core/guards/auth.guards';
 
 
 
@@ -27,11 +29,11 @@ export const routes: Routes = [
   { path: 'inscription', component: RegisterPageComponent },
 
   // pages protégées
-  // {
-  //   path: 'publier-un-don',
-  //   component: CreateListingPageComponent,
-  //   canActivate: [authGuard]
-  // },
+  {
+    path: 'publier-un-don',
+    component: CreateListingPageComponent,
+    canActivate: [authGuard]
+  },
 
   // {
   //   path: 'profil',

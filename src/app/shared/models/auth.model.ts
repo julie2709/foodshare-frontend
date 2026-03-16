@@ -10,7 +10,6 @@ export interface RegisterPayload {
   password: string;
   pseudo: string;
   postalCode: string;
-  city?: string; // facultatif
 }
 
 // Ce que le backend renvoie après login
