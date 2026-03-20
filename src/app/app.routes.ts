@@ -10,6 +10,11 @@ import { ListingDetailPageComponent } from './pages/listing-detail-page/listing-
 import { RecipeDetailPageComponent } from './pages/recipe-detail-page/recipe-detail-page.component';
 import { CreateListingPageComponent } from './pages/create-listing-page/create-listing-page.component';
 import { authGuard } from './core/guards/auth.guards';
+import { adminGuard } from './core/guards/admin.guard';
+import { AdminDashboardPageComponent } from './features/admin/pages/admin-dashboard-page/admin-dashboard-page.component';
+import { MyDonationsPageComponent } from './features/user/pages/my-donations-page/my-donations-page.component';
+import { MyRequestsPageComponent } from './features/user/pages/my-requests-page/my-requests-page.component';
+import { ProfilePageComponent } from './features/user/pages/profile-page/profile-page.component';
 
 
 
@@ -35,17 +40,26 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
 
-  // {
-  //   path: 'profil',
-  //   component: ProfilePageComponent,
-  //   canActivate: [authGuard]
-  // },
-
-  // {
-  //   path: 'mes-dons',
-  //   component: MyListingsPageComponent,
-  //   canActivate: [authGuard]
-  // },
+  {
+    path: 'mes-dons',
+    component: MyDonationsPageComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'mes-demandes',
+    component: MyRequestsPageComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'profil',
+    component: ProfilePageComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin',
+    component: AdminDashboardPageComponent,
+    canActivate: [adminGuard]
+  },
 
   { path: '**', redirectTo: '' }
 ];

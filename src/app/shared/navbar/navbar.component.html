@@ -52,14 +52,89 @@
       </ul>
 
       <!-- ===== Actions (droite) ===== -->
-      <div class="d-flex gap-2 align-items-center">
-        <a routerLink="/connexion" class="btn btn-outline-success">Connexion</a>
+      <div class="d-flex gap-2 align-items-center nav-actions">
 
-        <a routerLink="/profil" class="profile-icon text-success fs-4" aria-label="Profil">
-          <i class="bi bi-person"></i>
+        <!-- Etat visiteur : on garde ta structure -->
+        <a
+          *ngIf="!(isAuthenticated$ | async)"
+          routerLink="/connexion"
+          class="btn btn-outline-success"
+        >
+          Connexion
         </a>
 
-        <a routerLink="/inscription" class="btn btn-success">Inscription</a>
+        <!-- Bloc profil -->
+        <div class="profile-wrapper" *ngIf="isAuthenticated$ | async; else visitorProfileIcon">
+          <button
+            type="button"
+            class="profile-trigger"
+            (click)="toggleDropdown($event)"
+            aria-label="Ouvrir le menu profil"
+          >
+            <span class="profile-icon text-success fs-4">
+              <i class="bi bi-person"></i>
+            </span>
+
+            <span class="profile-greeting" *ngIf="currentUser$ | async as user">
+              Hello {{ user.pseudo }}
+            </span>
+
+            <i class="bi bi-chevron-down dropdown-chevron"></i>
+          </button>
+
+          <div class="profile-dropdown" *ngIf="isDropdownOpen" (click)="$event.stopPropagation()">
+            <a routerLink="/mes-dons" class="dropdown-item" (click)="closeDropdown()">
+              <i class="bi bi-box-seam me-2"></i>
+              Mes dons
+            </a>
+
+            <a routerLink="/mes-demandes" class="dropdown-item" (click)="closeDropdown()">
+              <i class="bi bi-handbag me-2"></i>
+              Mes demandes
+            </a>
+
+            <a routerLink="/profil" class="dropdown-item" (click)="closeDropdown()">
+              <i class="bi bi-person-circle me-2"></i>
+              Mon profil
+            </a>
+
+            <ng-container *ngIf="currentUser$ | async as user">
+              <a
+                *ngIf="isAdmin(user)"
+                routerLink="/admin"
+                class="dropdown-item dropdown-item--admin"
+                (click)="closeDropdown()"
+              >
+                <i class="bi bi-shield-lock me-2"></i>
+                Dashboard admin
+              </a>
+            </ng-container>
+
+            <div class="dropdown-divider"></div>
+
+            <button type="button" class="dropdown-item dropdown-item--logout" (click)="onLogout()">
+              <i class="bi bi-box-arrow-right me-2"></i>
+              Déconnexion
+            </button>
+          </div>
+        </div>
+
+        <!-- Etat visiteur : on garde ton icône profil -->
+        <ng-template #visitorProfileIcon>
+          <a routerLink="/profil" class="profile-icon text-success fs-4" aria-label="Profil">
+            <i class="bi bi-person"></i>
+          </a>
+        </ng-template>
+
+        <!-- Etat visiteur : on garde ta structure -->
+        <a
+          *ngIf="!(isAuthenticated$ | async)"
+          routerLink="/inscription"
+          class="btn btn-success"
+        >
+          Inscription
+        </a>
+
       </div>
 
     </div>

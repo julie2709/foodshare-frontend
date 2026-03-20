@@ -230,6 +230,109 @@
   margin: 0 0 4px;
 }
 
+/* =======================================================
+   PROFILE DROPDOWN (mode connecté)
+   ======================================================= */
+.nav-actions {
+  position: relative;
+}
+
+.profile-wrapper {
+  position: relative;
+}
+
+.profile-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--fs-border);
+  background: #fff;
+  border-radius: var(--fs-radius-sm);
+  padding: 8px 12px;
+  color: var(--fs-green);
+  font-weight: 600;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(47, 107, 79, 0.06);
+    border-color: rgba(47, 107, 79, 0.25);
+  }
+}
+
+.profile-greeting {
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.dropdown-chevron {
+  font-size: 0.8rem;
+  color: var(--fs-green);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid var(--fs-border);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+  padding: 10px;
+  z-index: 1200;
+}
+
+.dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--fs-text);
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(47, 107, 79, 0.06);
+    color: var(--fs-green);
+  }
+}
+
+.dropdown-item--logout {
+  color: #a94442;
+
+  &:hover {
+    background-color: rgba(169, 68, 66, 0.08);
+    color: #a94442;
+  }
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--fs-border);
+  margin: 8px 0;
+}
+
+@media (max-width: 992px) {
+  .profile-wrapper {
+    width: 100%;
+  }
+
+  .profile-trigger {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-dropdown {
+    position: static;
+    margin-top: 10px;
+    width: 100%;
+    box-shadow: none;
+  }
+}
 
 /* =======================================================
    RESPONSIVE
